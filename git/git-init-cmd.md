@@ -1,7 +1,7 @@
 # &#35; commands of docker usage
 
 #### &#42; git init manual : <https://git-scm.com/docs/git-init/>
-#### &#42; git init ~ commit
+#### &#42; git config ~ init
 ```bash
 ## git config --list
 git config --global user.name "username"
@@ -14,14 +14,14 @@ git config --unset user.email
 git init
 ```
 
-#### sync to local and git server
-#### if you want to only push, must have to skipe git clone command
+####&#42; sync to local and git server
+####&#42; if you want to only push, must have to skipe git clone command
 ```bash
 git clone  http://git.site.com/username/projectname.git
 
 ```
 
-
+#### &#42; git add ~ push
 ```bash
 ## add/store to staging area
 git add [. | filename]
