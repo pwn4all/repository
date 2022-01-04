@@ -39,7 +39,7 @@ git remote set-url origin http://git.site.com/username/projectname.git
 git remote set-url origin username@git.site.com/username/projectname.git
 
 ## check oring server addr
-git remove -v
+git remote -v
 
 ## save to remote git server
 git push -u origin master
