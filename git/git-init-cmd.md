@@ -15,7 +15,7 @@ git init
 ```
 
 #### &#42; sync to local and git server
-##### &#42; if you want to <u>only push</u>, must have to <u>skip git clone command</u>
+##### &#42; if you want to <U>only push</U>, must have to <U>skip git clone command</U>
 ```bash
 git clone  http://git.site.com/username/projectname.git
 
