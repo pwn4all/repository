@@ -121,9 +121,9 @@ else
     echo "Usage: $0 start|stop|status"
 fi
 
-$ ./logstash.sh start
-$ ./logstash.sh stop
-$ ./logstash.sh status
+$ ./opensearch.sh start
+$ ./opensearch.sh stop
+$ ./opensearch.sh status
 ```
 
 #### 7. add service file of systemd for working
