@@ -72,10 +72,10 @@ server.ssl.key: /usr/local/config/esnode-key.pem
 $ cd /opensearch/opensearch-dashboards-2.0.1
 ---------------------------------------------------
 $ vi dashboards.sh
-
+---------------------------------------------------
 #!/bin/bash
 
-HOMEPATH=/usr/local/opensearch-dashboards-2.0.1
+HOMEPATH=/opensearch/opensearch-dashboards-2.0.1
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 start|stop|staus"
