@@ -1,7 +1,7 @@
 #### opensearch : <https://opensearch.org/>
 #### manual : <https://opensearch.org/docs/latest/opensearch/install/index/>
 #### my latest version : 2.0.1
-#### standalone type not
+#### standalone type not multi node
 
 
 * * *
