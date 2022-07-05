@@ -204,7 +204,7 @@ filter {
     remove_field => ["@version", "host"]
   }
 
-  # set date when keyword %{+yy.MM.dd} doesn't work
+  # set date when keyword %{+yyMMdd} doesn't work
   ruby {
     init => "require 'time'"
     code => "event.set('indexDate', Time.now.utc.getlocal.strftime('%Y%m%d'))"
@@ -221,14 +221,18 @@ output {
     cacert => "/usr/local/config/root-ca.pem"
     user => "admin"
     password => "admin"
+    ###############################
+    ## If you want to set as VARIABLES(OS_USR/OS_PWD), use the opensearch.keystore command.
     #user => "${OS_USR}"
     #password => "${OS_PWD}"
+    ###############################
     #auth_type => {
     #  type => 'basic'
     #  user => 'admin'
     #  password => 'admin'
     #}
 
+    # index => 'logstash-%{+YYMMdd}
     index => "logstash-%{indexDate}"
 
   }
