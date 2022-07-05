@@ -19,7 +19,7 @@ $ sudo chown user:user /opensearch
 ```bash
 1. go to https://opensearch.org/downloads.html
 
-2. download latest version (logstash-oss.....tar.gz)
+2. download latest version
   ex)
   $ wget https://artifacts.opensearch.org/logstash/logstash-oss-with-opensearch-output-plugin-7.16.3-linux-x64.tar.gz
 ```
@@ -65,11 +65,11 @@ output {
 
 $ cd /opensearch/logstash-7.16.3
 $ ./bin/logstash -f ./config/logstash-sample.conf
-Using bundled JDK: /usr/local/logstash-7.16.3/jdk
+Using bundled JDK: /opensearch/logstash-7.16.3/jdk
 .
 .
 .
-hello logstash
+hello logstash    <= your input using typing
 {
       "@version" => "1",
        "message" => "hello logstash",
@@ -81,16 +81,20 @@ hello logstash
 
 #### 6. add script file about start/stop/status for working
 ```bash
+---------------------------------------------------
 $ vi logstash.sh
+---------------------------------------------------
 #!/bin/sh
+
+HOMEPATH=/opensearch/logstash-7.16.3
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 start|stop|staus"
     exit -1
 # start
 elif [ "$1" == "start" ]; then
-    ./bin/logstash -f ./config/logstash-stable.conf&
-    #nohup ./bin/logstash -f ./config/logstash-stable.conf&
+    $HOMEPATH/bin/logstash -f $HOMEPATH/config/logstash-asfs-inf.conf&
+    #nohup $HOMEPATH/bin/logstash -f $HOMEPATH/config/logstash-asfs-inf.conf&
 elif [ "$1" == "stop" ]; then
     kill -9 $(ps -ef | grep logstash | grep -v grep | awk '{print $2}')
 elif [ "$1" == "status" ]; then
@@ -98,10 +102,11 @@ elif [ "$1" == "status" ]; then
 else
     echo "Usage: $0 start|stop|status"
 fi
-
+---------------------------------------------------
 $ ./logstash.sh start
 $ ./logstash.sh stop
 $ ./logstash.sh status
+---------------------------------------------------
 ```
 
 #### 7. add service file of systemd for working
@@ -112,12 +117,11 @@ $ sudo vi /usr/lib/systemd/system/logstash.service
 Description=logstash
 Documentation=https://opensearch.org/docs/
 After=network.target
-
 [Service]
 RuntimeDirectory=logstash
 ExecStart=/opensearch/logstash-7.16.3/bin/logstash -f /opensearch/logstash-7.16.3/config/logstash-stable.conf
 Restart=always
-WorkingDirectory=/usr/local/logstash-7.16.3
+WorkingDirectory=/opensearch/logstash-7.16.3
 User=user
 Group=user
 
