@@ -141,13 +141,7 @@ WorkingDirectory=/usr/local/opensearch-2.0.1/
 User=user
 Group=user
 
-
-# StandardOutput is configured to redirect to journalctl since
-# some error messages may be logged in standard output before
-# elasticsearch logging system is initialized. Elasticsearch
-# stores its logs in /var/log/elasticsearch and does not use
-# journalctl by default. If you also want to enable journalctl
-# logging, you can simply remove the "quiet" option from ExecStart.
+# print error
 StandardOutput=journal
 StandardError=inherit
 
@@ -184,6 +178,9 @@ TimeoutStartSec=75
 [Install]
 WantedBy=multi-user.target
 
+-----------------------------------------------------------------------------------------
+## have to run daemon-reload command after creating service file
+$ sudo systemctl daemon-reload
 
 $ sudo systemctl start opensearch.service
 $ sudo systemctl stop opensearch.service
