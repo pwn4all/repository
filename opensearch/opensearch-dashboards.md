@@ -86,6 +86,7 @@ else
 fi
 
 ---------------------------------------------------
+## have to run daemon-reload command after creating service file
 $ sudo systemctl daemon-reload
 
 $ ./dashboards.sh start
