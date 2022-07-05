@@ -20,6 +20,8 @@ $ sudo chown user:user /opensearch
 1. go to https://opensearch.org/downloads.html
 
 2. download latest version (opensearch.....tar.gz)
+  ex)
+  $ wget https://artifacts.opensearch.org/releases/bundle/opensearch/2.0.1/opensearch-2.0.1-linux-x64.tar.gz
 
 ```
 
