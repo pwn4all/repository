@@ -61,6 +61,7 @@ $ curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
 
 #### 5. basic setting
 ```bash
+---------------------------------------------------
 #### memory
 $ sudo vi /etc/sysctl.conf
 .
@@ -73,6 +74,7 @@ $ sudo sysctl -p
 $ cat /proc/sys/vm/max_map_count
 262144
 
+---------------------------------------------------
 #### ip and port 
 $ cd /usr/local/opensearch-2.0.1/config
 $ vi opensearch.yml
@@ -84,6 +86,17 @@ network.host: ["_local_", "_site_"]
 # listen port
 http.port: 9200
 
+---------------------------------------------------
+#### jvm memory
+$ vi jvm.options
+.
+.
+# Optimized for your server
+-Xms1g 
+-Xmx1g
+.
+.
+---------------------------------------------------
 ```
 
 #### 6. add script file about start/stop/status for working
