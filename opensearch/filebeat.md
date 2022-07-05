@@ -65,7 +65,9 @@ $ vi filebeat-stable.yml
 
 #### 6. add script file about start/stop/status for working
 ```bash
+---------------------------------------------------
 $ vi filebeat.sh
+---------------------------------------------------
 #!/bin/sh
 
 HOMEPATH=/opensearch/filebeat-7.12.1-linux-x86_64
@@ -84,15 +86,18 @@ else
     echo "Usage: $0 start|stop|status"
 fi
 fi
-
+---------------------------------------------------
 $ ./filebeat.sh start
 $ ./filebeat.sh stop
 $ ./filebeat.sh status
+---------------------------------------------------
 ```
 
 #### 7. add service file of systemd for working
 ```bash
+---------------------------------------------------
 $ sudo vi /usr/lib/systemd/system/filebeat.service
+---------------------------------------------------
 
 [Unit]
 Description=filebeat
@@ -120,7 +125,7 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl start filebeat.service
 $ sudo systemctl stop filebeat.service
 $ sudo systemctl status filebeat.service
-
+---------------------------------------------------
 ```
 
 
