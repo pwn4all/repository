@@ -78,7 +78,7 @@ $ cat /proc/sys/vm/max_map_count
 
 ---------------------------------------------------
 #### ip and port 
-$ cd /usr/local/opensearch-2.0.1/config
+$ cd /opensearch/opensearch-2.0.1/config
 $ vi opensearch.yml
 # _local_ : 127.0.0.1
 # _site_ : all ips except _local_
@@ -137,9 +137,9 @@ After=network.target
 
 [Service]
 RuntimeDirectory=opensearch
-ExecStart=/usr/local/opensearch-2.0.1/bin/opensearch
+ExecStart=/opensearch/opensearch-2.0.1/bin/opensearch
 Restart=always
-WorkingDirectory=/usr/local/opensearch-2.0.1/
+WorkingDirectory=/opensearch/opensearch-2.0.1/
 User=user
 Group=user
 
