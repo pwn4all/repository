@@ -19,7 +19,7 @@ $ sudo chown user:user /opensearch
 ```bash
 1. go to https://opensearch.org/downloads.html
 
-2. download latest version (opensearch-dashboards.....tar.gz)
+2. download latest version
   ex)
   $ wget https://artifacts.opensearch.org/releases/bundle/opensearch-dashboards/2.0.1/opensearch-dashboards-2.0.1-linux-x64.tar.gz
 
@@ -36,6 +36,7 @@ $ tar -zxvf opensearch-dashboards-2.0.1-linux-x64.tar.gz -C /opensearch/
 
 #### 4. basic setting
 ```bash
+---------------------------------------------------
 $ cd /opensearch/opensearch-dashboards-2.0.1/config/
 ---------------------------------------------------
 #### ip and port
@@ -67,16 +68,21 @@ server.ssl.key: /usr/local/config/esnode-key.pem
 
 #### 6. add script file about start/stop/status for working
 ```bash
+---------------------------------------------------
 $ cd /opensearch/opensearch-dashboards-2.0.1
+---------------------------------------------------
 $ vi dashboards.sh
+
 #!/bin/bash
+
+HOMEPATH=/usr/local/opensearch-dashboards-2.0.1
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 start|stop|staus"
     exit -1
 # start
 elif [ "$1" == "start" ]; then
-    ./bin/opensearch-dashboards -c ./config/opensearch_dashboards.yml&
+    $HOMEPATH/bin/opensearch-dashboards -c $HOMEPATH/config/opensearch_dashboards.yml&
 elif [ "$1" == "stop" ]; then
     kill -9 $(ps -ef|grep /node/bin/node | grep /src/cli/dist | awk '{print $2}')
 elif [ "$1" == "status" ]; then
@@ -97,7 +103,7 @@ $ ./dashboards.sh status
 
 #### 7. add service file of systemd for working
 ```bash
-$ sudo vi /usr/lib/systemd/system/opensearch.service
+$ sudo vi /usr/lib/systemd/system/opensearch-dashboards.service
 
 [Unit]
 Description=opensearch-dashboards
@@ -108,7 +114,7 @@ After=network.target
 RuntimeDirectory=opensearch-dashboards
 ExecStart=/opensearch/opensearch-dashboards-2.0.1/bin/opensearch-dashboards "-c /opensearch/opensearch-dashboards-2.0.1/config/opensearch_dashboards.yml"
 Restart=always
-WorkingDirectory=/usr/local/opensearch-dashboards-2.0.1
+WorkingDirectory=/opensearch/opensearch-dashboards-2.0.1
 User=user
 Group=user
 
