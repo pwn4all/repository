@@ -111,8 +111,11 @@ $ vi jvm.options
 ---------------------------------------------------
 $ vi opensearch.sh
 ---------------------------------------------------
-HOMEPATH=/usr/local/opensearch-2.0.1
+#!/bin/bash
+
+HOMEPATH=opensearch/opensearch-2.0.1
 PIDFILE=os.pid
+
 if [ $# -ne 1 ]; then
     echo "Usage: $0 start|stop|staus"
     exit -1
