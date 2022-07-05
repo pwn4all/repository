@@ -152,10 +152,10 @@ input{} -> filter{} -> output{}
 
 
 ---------------------------------------------------
+$ vi ./config/logstash-stable.conf
+---------------------------------------------------
 ### 2) input
 ### - stdin{}, tcp{}, beats{}, file{},  ... (your choice)
-
-$ vi ./config/logstash-stable.conf
 input {
   #stdin {}
 
