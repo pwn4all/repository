@@ -1,6 +1,7 @@
-# opensearch : <https://opensearch.org/>
-# manual : <https://opensearch.org/docs/latest/opensearch/install/index/>
-# my latest version : 2.0.1
+#### opensearch : <https://opensearch.org/>
+#### manual : <https://opensearch.org/docs/latest/opensearch/install/index/>
+#### my latest version : 2.0.1
+#### standalone type not
 
 
 * * *
@@ -60,6 +61,7 @@ $ curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
 
 #### 5. basic setting
 ```bash
+#### memory
 $ sudo vi /etc/sysctl.conf
 .
 .
@@ -70,6 +72,17 @@ $ sudo sysctl -p
 
 $ cat /proc/sys/vm/max_map_count
 262144
+
+#### ip and port 
+$ cd /usr/local/opensearch-2.0.1/config
+$ vi opensearch.yml
+# _local_ : 127.0.0.1
+# _site_ : all ips except _local_
+# then _local_, _site_ means all ips for listen
+network.host: ["_local_", "_site_"]
+
+# listen port
+http.port: 9200
 
 ```
 
