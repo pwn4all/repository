@@ -19,7 +19,7 @@ $ sudo chown user:user /opensearch
 ```bash
 1. go to https://opensearch.org/downloads.html
 
-2. download latest version (opensearch.....tar.gz)
+2. download latest version
   ex)
   $ wget https://artifacts.opensearch.org/releases/bundle/opensearch/2.0.1/opensearch-2.0.1-linux-x64.tar.gz
 
@@ -35,11 +35,16 @@ $ tar -zxvf opensearch-2.0.1-linux-x64.tar.gz -C /opensearch
 
 #### 4. install and connect test
 ```bash
+---------------------------------------------------
 $ cd /opensearch/opensearch-2.0.1/
+---------------------------------------------------
 $ ./opensearch-tar-install.sh
 .
 .
 .
+WARNING: Please consider reporting this to the maintainers of org.opensearch.bootstrap.Security
+WARNING: System::setSecurityManager will be removed in a future release
+---------------------------------------------------
 $ curl -XGET https://localhost:9200 -u 'admin:admin' --insecure
 {
   "name" : "opensearch",
@@ -103,33 +108,41 @@ $ vi jvm.options
 
 #### 6. add script file about start/stop/status for working
 ```bash
+---------------------------------------------------
 $ vi opensearch.sh
-#!/bin/bash
-
+---------------------------------------------------
+HOMEPATH=/usr/local/opensearch-2.0.1
+PIDFILE=os.pid
 if [ $# -ne 1 ]; then
     echo "Usage: $0 start|stop|staus"
     exit -1
 # start
 elif [ "$1" == "start" ]; then
-    ./bin/opensearch -d -p os.pid
+    $HOMEPATH/bin/opensearch -d -p $HOMEPATH/$PIDFILE
 elif [ "$1" == "stop" ]; then
-    kill -9 $(cat os.pid)
-    rm -rf os.pid
+  if [ -f "$HOMEPATH/$PIDFILE" ]; then
+    kill -9 $(cat $HOMEPATH/$PIDFILE)
+    rm -rf $PIDFILE
+  fi
 elif [ "$1" == "status" ]; then
-    ps -ef | grep $(cat os.pid)
+  if [ -f "$HOMEPATH/$PIDFILE" ]; then
+    ps -ef | grep $(cat $HOMEPATH/$PIDFILE) | grep -v grep
+  fi
 else
     echo "Usage: $0 start|stop|status"
 fi
-
+---------------------------------------------------
 $ ./opensearch.sh start
 $ ./opensearch.sh stop
 $ ./opensearch.sh status
+---------------------------------------------------
 ```
 
 #### 7. add service file of systemd for working
 ```bash
+---------------------------------------------------
 $ sudo vi /usr/lib/systemd/system/opensearch.service
-
+---------------------------------------------------
 [Unit]
 Description=opensearch
 Documentation=https://opensearch.org/docs/
