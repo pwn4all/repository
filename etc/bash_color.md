@@ -30,4 +30,4 @@ printf "Font color testing...\n"
 
 
 **3) result font color**
-![font_color_in_bash](https://github.com/pwn4all/repository/tree/master/etc/imgs/font_color_in_bash.png "font_color_in_bash")
+![font_color_in_bash](https://github.com/pwn4all/repository/tree/master/etc/imgs/font_color_in_bash.png)
