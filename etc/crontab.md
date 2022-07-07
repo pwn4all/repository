@@ -2,8 +2,10 @@
 **Best important two point of crontab**
 
 **1) PATH**
+```bash
 Starting path is basic path.
 For example, path is / or /root on cron of root. and path is /home/user on cron of user.
+```
 
 
 **2) Format**
