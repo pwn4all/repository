@@ -90,6 +90,6 @@ $ crontab -l
 --------------------------------------------------------------------------
 $ crontab -l
 --------------------------------------------------------------------------
-* * * * * cd /usr/local/appweb && /usr/local/appweb/appweb.py >> /usr/local/appweb/cron_err.log 2>&1
+* * * * * cd /usr/local/appweb && /usr/bin/python3 ./appweb.py >> ./logs/cron_err.log 2>&1
 
 ```
