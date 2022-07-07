@@ -5,6 +5,8 @@
 ```bash
 Starting path is basic path.
 For example, path is / or /root on cron of root. and path is /home/user on cron of user.
+
+<span style="color:blue">Therefore, all path must be absolute path.</span>
 ```
 
 
@@ -63,5 +65,31 @@ APPWEB_CNT=$(ps -ef|grep appweb.py|grep -v grep|wc -l)
 if [ "$APPWEB_CNT" -le 0 ]; then
     $PYTHON $APP_HOME/appweb.py&
 fi
+
+```
+
+
+**4) Debugging tip**
+
+```bash
+--------------------------------------------------------------------------
+$ crontab -l
+--------------------------------------------------------------------------
+* * * * * /usr/local/appweb/watchdog.sh >> /usr/local/appweb/cron_err.log 2>&1
+
+```
+
+
+**5) relative path tip in code**
+
+```bash
+1. if you read or write file using relative path in python code.
+2. you meet err, because when cron is loaded path is user's default path
+  - (ex : /home/user or /root ...)
+3. therefore, you can add cd command like below
+--------------------------------------------------------------------------
+$ crontab -l
+--------------------------------------------------------------------------
+* * * * * cd /usr/local/appweb && /usr/local/appweb/appweb.py >> /usr/local/appweb/cron_err.log 2>&1
 
 ```
