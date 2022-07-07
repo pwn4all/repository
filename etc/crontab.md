@@ -75,8 +75,19 @@ fi
 --------------------------------------------------------------------------
 $ crontab -l
 --------------------------------------------------------------------------
-* * * * * /usr/local/appweb/watchdog.sh >> /usr/local/appweb/cron_err.log 2>&1
+* * * * * /usr/local/appweb/watchdog.sh >> /usr/local/appweb/logs/cron_err.log 2>&1
 
+
+## you can to find trouble.
+$ vi cron_err.log
+.
+.
+File "/usr/local/flaskweb/flaskweb.py", line 8, in <module>
+    logging.basicConfig(filename='./logs/flaskweb.log', level=logging.INFO)
+.
+.
+.
+FileNotFoundError: [Errno 2] No such file or directory: '/home/user/logs/flaskweb.log'  <= relative path error
 ```
 
 
