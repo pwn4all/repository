@@ -29,6 +29,8 @@ dw: day of week(0~7), 0:Sunday
 $ crontab -l
 --------------------------------------------------------------------------
 * * * * * /usr/local/appweb/watchdog.sh
+or
+*/1 * * * * /usr/local/appweb/watchdog.sh
 
 --------------------------------------------------------------------------
 $ vi watchdog.sh
