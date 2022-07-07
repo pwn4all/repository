@@ -7,7 +7,8 @@ Starting path is basic path.
 For example, path is / or /root on cron of root. and path is /home/user on cron of user.
 
 ```
-<span style="color:blue">Therefore, all path must be absolute path.</span>
+<span style="color: blue;">Therefore, all path must be absolute path.</span>
+<span style="color: red;">text</span>
 
 
 **2) Format**
