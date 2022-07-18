@@ -1,0 +1,34 @@
+***file transfer using expect***
+
+
+```bash
+-------------------------------------------
+# target filename has date
+-------------------------------------------
+$ ls test-2022-07-18.log
+test-2022-07-18.log
+-------------------------------------------
+```
+
+
+```bash
+-------------------------------------------
+#!/usr/bin/expect
+
+set DATETIME [timestamp -format {%Y-%m-%d}]
+
+spawn /usr/bin/scp -P20022 test-$DATETIME.log user@localhost:/home/user
+set pass "password"
+expect {
+    password: {send "$pass\r"; exp_continue}
+}# sync time automatically
+-------------------------------------------
+```
+
+
+```bash
+-------------------------------------------
+# crontab
+* * * * * /app/scpconn/scpconn.exp > /app/scpconn/scpconn.log 2>&1
+-------------------------------------------
+```
