@@ -23,10 +23,10 @@ set TODAY [timestamp -format {%Y-%m-%d}]
 set YESTERDAY [exec date -v -1d "+%Y-%m-%d"]
 
 spawn /usr/bin/scp -P22  /home/user/app-$YESTERDAY.log user@localhost:/app/files
-set pass "user"
+set password "password"
 expect {
     # when asked for a password
-    "password:" { send "$pass\r"; exp_continue }
+    "password:" { send "$password\r"; exp_continue }
     # When asked if you want to connect
     "connecting (yes/no)?" { send "yes\r"; exp_continue }
 }
@@ -74,7 +74,7 @@ expect <<EOF
 set timeout 3
 
 spawn /usr/bin/scp -P20022 /home/user/app-$YESTERDAY.log user@localhost:/app/files
-#set pass "password"
+#set password "password"
 expect {
     # when asked for a password
     "password:" { send "$PASSWORD\r"; exp_continue }
