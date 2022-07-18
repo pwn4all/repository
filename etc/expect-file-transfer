@@ -15,17 +15,23 @@ test-2022-07-18.log
 
 ```bash
 -------------------------------------------
+$ vi ./scpconn.exp
+-------------------------------------------
 #!/usr/bin/expect
 
 set TODAY [timestamp -format {%Y-%m-%d}]
 set YESTERDAY [exec date -v -1d "+%Y-%m-%d"]
 
-#spawn /usr/bin/scp -P20022  pmd-$TODAY-eclipse.log user@localhost:/home/user
-spawn /usr/bin/scp -P20022  pmd-$YESTERDAY-eclipse.log user@localhost:/home/user
+spawn /usr/bin/scp -P22  pmd-$YESTERDAY-eclipse.log user@localhost:/home/user
 set pass "user"
 expect {
-    password: {send "$pass\r"; exp_continue}
+    # when asked for a passwordd
+    "password:" { send "$pass\r"; exp_continue }
+    # When asked if you want to connect
+    "connecting (yes/no)?" { send "yes\r"; exp_continue }
 }
+-------------------------------------------
+$ chmod 755 ./scpconn.exp
 -------------------------------------------
 ```
 
