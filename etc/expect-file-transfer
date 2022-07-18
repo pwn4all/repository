@@ -20,7 +20,8 @@ $ vi ./scpconn.exp
 #!/usr/bin/expect
 
 set TODAY [timestamp -format {%Y-%m-%d}]
-set YESTERDAY [exec date -v -1d "+%Y-%m-%d"]
+#set YESTERDAY [exec date -v -1d "+%Y-%m-%d"]
+set YESTERDAY [exec date -d yesterday "+%Y-%m-%d"]
 
 spawn /usr/bin/scp -P22  /home/user/app-$YESTERDAY.log user@localhost:/app/files
 set password "password"
@@ -64,7 +65,8 @@ DATE=/usr/bin/date
 FILEPATH=/app/files/
 
 TODAY=$($DATE "+%Y-%m-%d")
-YESTERDAY=$($DATE -v -1d "+%Y-%m-%d")
+#YESTERDAY=$($DATE -v -1d "+%Y-%m-%d")
+YESTERDAY=$($DATE -d yesterday "+%Y-%m-%d")
 PASSWORD=password
 
 ###########################################################################
