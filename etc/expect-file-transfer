@@ -5,6 +5,8 @@
 -------------------------------------------
 # target filename has date
 -------------------------------------------
+$ ls test-2022-07-17.log
+test-2022-07-17.log
 $ ls test-2022-07-18.log
 test-2022-07-18.log
 -------------------------------------------
@@ -15,20 +17,22 @@ test-2022-07-18.log
 -------------------------------------------
 #!/usr/bin/expect
 
-set DATETIME [timestamp -format {%Y-%m-%d}]
+set TODAY [timestamp -format {%Y-%m-%d}]
+set YESTERDAY [exec date -v -1d "+%Y-%m-%d"]
 
-spawn /usr/bin/scp -P20022 test-$DATETIME.log user@localhost:/home/user
-set pass "password"
+#spawn /usr/bin/scp -P20022  pmd-$TODAY-eclipse.log user@localhost:/home/user
+spawn /usr/bin/scp -P20022  pmd-$YESTERDAY-eclipse.log user@localhost:/home/user
+set pass "user"
 expect {
     password: {send "$pass\r"; exp_continue}
-}# sync time automatically
+}
 -------------------------------------------
 ```
 
 
 ```bash
 -------------------------------------------
-# crontab
+# crontab with log(include error)
 * * * * * /app/scpconn/scpconn.exp > /app/scpconn/scpconn.log 2>&1
 -------------------------------------------
 ```
