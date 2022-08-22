@@ -33,7 +33,7 @@ def rename_file(path_dir, name_old, name_new):
     os.rename(path_dir+name_old, path_dir+name_new)
 
 
-path_dir = './02/'
+path_dir = './directory/'
 ###########################################################################################
 ## 변경할 소스 파일(name_old)명 리스트를 읽는다.
 ###########################################################################################
@@ -49,7 +49,7 @@ file_names.sort()
 print(file_names)
 
 ###########################################################################################
-## dir_path 에 있는 파일명을 list.txt 에 있는 파일명으로 변경한다.
+## path_dir 에 있는 파일명을 list.txt 에 있는 파일명으로 변경한다.
 ###########################################################################################
 for idx, file_name in enumerate(file_names):
     rename_file(path_dir, file_lists[idx], file_name)
