@@ -10,6 +10,8 @@ plugins {
     id 'kotlin-android-extensions'      <= add this line
 }
 ```
+##### * Finally click Sync Project with Gradle Files
+
 
 ### 2. Menu
   - Setting > Editor > Live Templates
