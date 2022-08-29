@@ -1,15 +1,15 @@
 
-# logcat setting
+# log setting
 
-1. Menu
+### 1. Menu
   - Setting > Editor > Live Templates
 
-2. create Templates in Kotlin
+### 2. create Templates in Kotlin
   - Abbrevivation : logd
   - Description.  : log.d(TAG, content)
   - Template Text : Log.d(TAG,"$CLASS_NAME$ - $METHOD_NAME$() called")
 
-3. coding
+### 3. coding
 ```kotlin
 class MainActivity : AppCompatActivity() {
 
@@ -31,5 +31,5 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-4. filterd view on logcat in andoidstudio
+### 4. filterd view on logcat in andoidstudio
   - filter : mylog
