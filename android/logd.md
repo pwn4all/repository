@@ -1,15 +1,25 @@
 
 # log setting
 
-### 1. Menu
+### 1. How to fix unresolved reference issue
+  - Gradle Scripts > build.gradle(Module: My_Application....)
+```gradle
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android-extensions'      <= add this line
+}
+```
+
+### 2. Menu
   - Setting > Editor > Live Templates
 
-### 2. create Templates in Kotlin
+### 3. create Templates in Kotlin
   - Abbrevivation : logd
   - Description.  : log.d(TAG, content)
   - Template Text : Log.d(TAG,"$CLASS_NAME$ - $METHOD_NAME$() called")
 
-### 3. coding
+### 4. coding
 ```kotlin
 class MainActivity : AppCompatActivity() {
 
@@ -31,11 +41,13 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### 4. filterd view on logcat in andoidstudio
-  - filter : mylog
+### 5. filtered view on logcat in andoidstudio
+  - filter string: mylog (reference 3 line on 3. coding)
 ```bash
 2022-08-29 15:14:23.276 26629-26629/com.example.myapplication D/Log: MainActivity - onStart() called
 2022-08-29 15:14:23.280 26629-26629/com.example.myapplication D/Log: MainActivity - onResume() called
 2022-08-29 15:14:27.399 26629-26629/com.example.myapplication D/Log: MainActivity - onPause() called
 2022-08-29 15:14:27.854 26629-26629/com.example.myapplication D/Log: MainActivity - onStop() called
 ```
+
+
