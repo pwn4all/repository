@@ -1,9 +1,8 @@
 
-# simple layout using text and button
-# button click event
+# simple 2 activities (button click event)
 
 
-### for button design
+## for button design
 ### 1. res > drawable > rounded_corner_green.xml
   - Gradle Scripts > build.gradle(Module: My_Application....)
 ```xml
@@ -34,9 +33,8 @@
 </shape>
 ```
 
-### for button setting
-### 00. res > layout > activity_main.xml
-  - Gradle Scripts > build.gradle(Module: My_Application....)
+## for button layout
+### 2-1. res > layout > activity_main.xml
 ```xml
     <Button
         android:id="@+id/btn_1"
@@ -66,9 +64,22 @@
         />
 ```
 
+### 2-2. res > layout > activity_popup.xml
+```xml
+    <Button
+        android:id="@+id/btn_back"
+        android:onClick="onBackButtonClicked "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="Back"
+        android:layout_centerInParent="true"
+        />
+```
 
-### for button setting
-### 00. res > layout > activity_main.xml
+
+## for button activity
+### 3-1. java > package_name > MainActivity
   - Gradle Scripts > build.gradle(Module: My_Application....)
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -94,3 +105,28 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+### 3-2. java > package_name > PopupActivity
+  - Gradle Scripts > build.gradle(Module: My_Application....)
+```kotlin
+class PopupActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_popup)
+
+        val button_back = findViewById<Button>(R.id.btn_back)
+        button_back.setOnClickListener() {
+            onBackButtonClicked(R.layout.activity_popup)
+        }
+    }
+
+    fun onBackButtonClicked(view: Int){
+        Log.d(TAG,"PopupActivity - onBackButtonClicked() called")
+
+        finish()
+    }
+}
+```
+
+
+
