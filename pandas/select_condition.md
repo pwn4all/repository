@@ -1,18 +1,72 @@
 # &#35; select data using condition
 [pandas.DataFrame.loc manual](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html)
 
-#### &#42; basically read xlsx/xls/csv file
+#### &#42; set dataframe
 ```python
 import pandas as pd
 
-filename = "/app/files/file.xlsx"
-filename = "/app/files/file.xls"
-filename = "/app/files/file.csv"
+df = pd.DataFrame([
+{'name': 'Mahatma Gandhi', 'country': 'india', 'age': 20},
+{'name': 'Christopher Columbus', 'country': 'spain', 'age': 39},
+{'name': 'King Arthur', 'country': 'united kingdom', 'age': 20},
+{'name': 'John Adams', 'country': 'usa', 'age': 21}
+])
 
-df = None
+------------------------------
+df
+------------------------------
+	name	                country	            age
+0	Mahatma Gandhi	        india	            20
+1	Christopher Columbus	spain	            39
+2	King Arthur	        united kingdom      20
+3	John Adams	        usa                 21
 
-if not filename.endswith("csv"):
-    df = pd.read_excel(filename, engine='openpyxl')
-else:
-    df = pd.read_csv(filename)
+```
+
+
+#### &#42; select data using single condition
+```python
+
+cond_1=(df['age']==39)
+df.loc[cond_1]
+
+--------------------------
+name	country	age
+1	Christopher Columbus	spain	39
+
+
+```
+
+
+#### &#42; select data using multi condition
+```python
+
+cond_1=(df['age']==20)
+cond_2=(df['name'].str.contains('Arthur'))
+df.loc[cond_1&cond_2]
+
+--------------------------
+name	country	age
+2	King Arthur	united kingdom	20
+
+```
+
+
+#### &#42; update data using multi condition
+```python
+
+cond_1=(df['age']==20)
+cond_2=(df['name'].str.contains('Arthur'))
+df.loc[cond_1&cond_2, 'age'] = 100
+
+--------------------------
+df
+--------------------------
+	name	country	age
+0	Mahatma Gandhi	india	20
+1	Christopher Columbus	spain	39
+2	King Arthur	united kingdom	100
+3	John Adams	usa	21
+
+
 ```
