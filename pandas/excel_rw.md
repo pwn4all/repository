@@ -1,7 +1,9 @@
 
 
 # &#35; Excel processing
-[read_excel() manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html)
+[pandas.read_excel manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html)
+[pandas.read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)
+
 
 #### &#42; basically read xlsx/xls/csv file
 ```python
