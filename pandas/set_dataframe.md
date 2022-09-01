@@ -1,5 +1,5 @@
-# &#35; select data using condition
-[pandas.DataFrame.loc manual](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html)
+# &#35; set dataframe
+[pandas.DataFrame manual](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
 
 #### &#42; basically set dataframe
 ```python
