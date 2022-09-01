@@ -39,3 +39,11 @@ viper	        4         5
 sidewinder	7         8
 
 ```
+
+
+#### &#42; copy dataframe
+```python
+
+df_backup = df.copy()
+
+```
