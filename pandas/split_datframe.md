@@ -11,4 +11,17 @@ test_data = df.drop(train_data.index)
 
 ```
 
+#### &#42; save to file
+```python
+filename = 'train.xlsx'
+#filename = 'test.xlsx'
 
+if not filename.endswith("csv"):
+    with pd.ExcelWriter(filename, mode='w', engine='openpyxl') as writer:
+        train_data.to_excel(writer, index=False)
+        #test_data.to_excel(writer, index=False)
+else:
+    with pd.ExcelWriter(filename, mode='w', engine='openpyxl') as writer:
+        train_data..to_csv(writer, index=False, sep=',')
+        #test_data.to_csv(writer, index=False, sep=',')
+```
