@@ -1,0 +1,3 @@
+gmail_receiver_account@gmail.com
+daum_receiver_account@daum.net
+naver_receiver_account@naver.com
