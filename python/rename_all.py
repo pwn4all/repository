@@ -37,7 +37,7 @@ path_dir = './directory/'
 ###########################################################################################
 ## 변경할 소스 파일(name_old)명 리스트를 읽는다.
 ###########################################################################################
-file_lists = [fl for fl in os.listdir(path_dir) if not fl.startswith('.')]
+file_lists = [sfn for sfn in os.listdir(path_dir) if not sfn.startswith('.')]
 file_lists.sort()
 print(file_lists)
 
