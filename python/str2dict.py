@@ -19,8 +19,9 @@ for str_line in str_lines:
     print(f'values : {str_to_dict.values()}')
     print("============================" * line_cnt)
 
-    
-    
+
+
+
 """
 ====================================================================================
 format : <class 'dict'>
@@ -34,12 +35,17 @@ dicts : {'English': 'hello python', 'Spanish': 'bonjour python', 'French': 'hola
 keys : dict_keys(['English', 'Spanish', 'French'])
 values : dict_values(['hello python', 'bonjour python', 'hola pitón'])
 ====================================================================================
-
-
 """
 
 """ 
 ## temp.txt
 {"English": "hello world", "Spanish": "Hola Mundo", "French": "Bonjour le monde"}
 {"English": "hello python", "Spanish": "bonjour python", "French": "hola pitón"}
+"""
+
+
+"""
+## json string format
+str_dict = '{"key": "value"}' => Good
+str_dict = "{'key': 'value'}" => Error
 """
