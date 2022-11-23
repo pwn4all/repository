@@ -1,4 +1,4 @@
-# &#35; set dataframe
+# &#35; drop column or row
 [pandas.DataFrame.drop manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.drop.html)
 
 #### &#42; basically set dataframe
