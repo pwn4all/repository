@@ -1,4 +1,4 @@
-# &#35; select data using condition
+# &#35; select and update data using condition
 [pandas.DataFrame.loc manual](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html)
 
 #### &#42; set dataframe
@@ -66,6 +66,26 @@ df
 0	Mahatma Gandhi	india	20
 1	Christopher Columbus	spain	39
 2	King Arthur	united kingdom	100
+3	John Adams	usa	21
+
+
+```
+
+
+
+#### &#42; except string
+```python
+
+--------------------------
+# not save
+df[~df['name'].str.contains('Arthur')]
+# save
+df = df[~df['name'].str.contains('Arthur')]
+df
+--------------------------
+	name	country	age
+0	Mahatma Gandhi	india	20
+1	Christopher Columbus	spain	39
 3	John Adams	usa	21
 
 
