@@ -23,6 +23,7 @@ docker container cp --help
 #### c) run container
 #### * format : docker run [options] imageName[:version]
 #### * port : -p local_port:container_port
+#### * port range : -p 28000-29000:8000-9000
 ```bash
 docker run -it --name myDebian -h webDebian -p 80:80 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-pwd -e MYSQL_DATABASE
 =daName [--privileged] -v /local_path:container_name/remote_path devian:latest
@@ -50,9 +51,11 @@ docker pull devian:latest
 
 #### 2) create container
 #### * format : docker create [options] imageName[:version]
+#### * port : -p local_port:container_port
+#### * port range : -p 28000-29000:8000-9000
 ```bash
 docker create -it --name myDebian -h webDebian -p 80:80 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-pwd -e MYSQL_DATABASE
-=daName [--privileged] -v /localpath:containerName/remotepath devian:latest
+=daName [--privileged] -v /local_path:container_name/remote_path devian:latest
 ```
 
 #### 3) run container
