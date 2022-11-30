@@ -17,7 +17,7 @@ y  3  4
 ```python
 import pandas as pd
 df2 = pd.DataFrame([[5, 6], [7, 8]], columns=list('AB'), index=['x', 'y'])
-df.append(df2)
+df = pd.concat([df, df2])
 ------------------
 df
 ------------------
