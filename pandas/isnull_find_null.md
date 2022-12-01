@@ -1,9 +1,10 @@
-# ▫️ find or drop null
+<h1>▫️ find or drop null</h1>
 [pandas.DataFrame.isnull manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isnull.html)
 ***
 <br>
 
-## <blockquote>set dataframe
+<h2><blockquote>set dataframe</h2>
+	
 ```python
 import pandas as pd
 import numpy as np
@@ -27,7 +28,8 @@ df
 ```
 <br><br>
 
-## <blockquote>find null value
+<h2><blockquote>find null value</h2>
+
 ```python
 
 --------------------------
@@ -51,7 +53,8 @@ df[~df['country'].notnull()]
 <br><br>
 
 
-## <blockquote>find not null value
+<h2><blockquote>find not null value</h2>
+
 ```python
 
 --------------------------
@@ -77,7 +80,8 @@ df[~df['country'].isnull()]
 <br><br>
 	
 
-## <blockquote>drop rows that contain null
+<h2><blockquote>drop rows that contain null</h2>
+
 ```python
 --------------------------
 df = df['country'].dropna(axis=0)
