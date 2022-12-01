@@ -1,7 +1,9 @@
-# &#35; find only null or not null
+# ▫️ find or drop null
 [pandas.DataFrame.isnull manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isnull.html)
+***
 
-#### &#42; set dataframe
+
+## <blockquote>set dataframe
 ```python
 import pandas as pd
 import numpy as np
@@ -25,7 +27,7 @@ df
 ```
 
 
-#### &#42; find null value
+## <blockquote>find null value
 ```python
 
 --------------------------
@@ -48,7 +50,7 @@ df[~df['country'].notnull()]
 ```
 
 
-#### &#42; find not null value
+## <blockquote>find not null value
 ```python
 
 --------------------------
@@ -70,4 +72,19 @@ df[~df['country'].isnull()]
 0	Mahatma Gandhi	india	20
 1	Christopher Columbus	spain	39
 2	King Arthur	united kingdom	20
+```
+
+
+## <blockquote>drop rows that contain null
+```python
+--------------------------
+df = df['country'].dropna(axis=0)
+df
+--------------------------
+                name        country        age
+0        Mahatma Gandhi           india   20
+1  Christopher Columbus           spain   39
+2           King Arthur  united kingdom   20
+
+
 ```
