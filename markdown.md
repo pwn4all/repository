@@ -14,12 +14,12 @@
 
 ## # Headline
 ```makup
-# The biggest title
-## Secondary title
-### Just title
-#### title
-##### title
-###### title
+# The biggest title  ==  <h1>string</h1>
+## Secondary title   ==  <h2>string</h2>
+### Just title       ==  <h3>string</h3>
+#### title           ==  <h4>string</h4>
+##### title          ==  <h5>string</h5>
+###### title         ==  <h6>string</h6>
 ```
 # The biggest title
 ## Secondary title
