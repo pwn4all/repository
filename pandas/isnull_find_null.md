@@ -9,11 +9,11 @@ import pandas as pd
 import numpy as np
 
 df = pd.DataFrame([
-{'name': 'Mahatma Gandhi', 'country': 'india', 'age': 20},
-{'name': 'Christopher Columbus', 'country': 'spain', 'age': 39},
-{'name': 'King Arthur', 'country': 'united kingdom', 'age': 20},
-{'name': 'John Adams', 'country': np.nan, 'age': 21}
-])
+	{'name': 'Mahatma Gandhi', 'country': 'india', 'age': 20},
+	{'name': 'Christopher Columbus', 'country': 'spain', 'age': 39},
+	{'name': 'King Arthur', 'country': 'united kingdom', 'age': 20},
+	{'name': 'John Adams', 'country': np.nan, 'age': 21}
+	])
 
 ------------------------------
 df
