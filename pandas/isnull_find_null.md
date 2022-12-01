@@ -1,4 +1,4 @@
-<h1>▫️ find or drop null</h1>
+<h1>▫️find or drop null▫️</h1>
 [pandas.DataFrame.isnull manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.isnull.html)
 ***
 <br>
