@@ -78,7 +78,26 @@ df[~df['country'].isnull()]
 2	King Arthur	united kingdom	20
 ```
 <br><br>
+
 	
+<h2><blockquote>drop all cols&rows that contain null</h2>
+
+```python
+--------------------------
+# save
+df.dropna()
+df
+--------------------------
+                name        country        age
+0        Mahatma Gandhi           india   20
+1  Christopher Columbus           spain   39
+2           King Arthur  united kingdom   20
+
+
+```
+		
+<br><br>
+		
 
 <h2><blockquote>drop rows that contain null</h2>
 
