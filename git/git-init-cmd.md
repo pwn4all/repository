@@ -42,6 +42,7 @@ git remote set-url origin username@git.site.com/username/projectname.git
 git remote -v
 
 ## save to remote git server
-git push -u origin master
+git branch -M main
+git push -uf origin main
 
 ```
