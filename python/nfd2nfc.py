@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# coding=utf-8
+# -*- coding: utf-8 -*-
 
 import os
 import argparse
@@ -12,8 +12,8 @@ def get_argv():
     :return: user's arguments
     '''
     parser = argparse.ArgumentParser(description='NFD to NFC')
-    parser.add_argument('-p', '--path', type=str, default='./', help='-p /home/user/ (default : ./)')
-    parser.add_argument('-e', '--extension', type=str, default='all', help='-e txt|xlsx|...')
+    parser.add_argument('-p', '--path', type=str, default='EMPTY', help='-p /home/user/ (default : ./)')
+    parser.add_argument('-e', '--extension', type=str, default='all', help='-e all|txt|xlsx|...')
     parser.add_argument('-t', '--type', type=str, default='all', help='-t all|dir|file')
     parser.add_argument('-r', '--recursive', type=str, default='off', nargs='*', help='-r [on|off]')
 
@@ -65,7 +65,7 @@ def get_endswith(itemlists, format):
     :return:
     '''
 
-    if format != None:
+    if format != None and format != '.all':
         lists = list()
         for itemlist in itemlists:
             if(itemlist.endswith(format)):
@@ -123,26 +123,39 @@ def chk_recurtype(type, filelists):
         return select_lists
 
 
+def print_usage():
+    print("[+] usage : python3 nfd2nfc.py --help")
+    print("[#] usage : python3 nfd2nfc.py -p /home/user -e all|txt|xlsx|... -t all|dir|file [-r [on|off]]")
+
+
 if __name__ == '__main__':
     ########################################################################
     ## set arguments
     ########################################################################
     user_input = get_argv()
 
+    if user_input.path == 'EMPTY':
+        import sys
+        print_usage()
+        sys.exit(0)
+
     arg_path = user_input.path
     if not arg_path.endswith('/'):
         arg_path += '/'
     arg_ext = user_input.extension
     arg_type = user_input.type
-    arg_recur = user_input.recursive
+    if len(user_input.recursive) == 0:
+        arg_recur = 'off'
+    else:
+        arg_recur = user_input.recursive
 
 
 
     ########################################################################
-    ## set arguments for test
+    ## print arguments
     ########################################################################
     print("=================== Arguments ====================")
-    print("[#] usage : python3 nfd2nfc.py -p /home/user -e txt type=file -r")
+    print_usage()
     print("==================================================")
     print("[+] path : {}".format(arg_path))
     print("[+] extension : {}".format(arg_ext))
@@ -187,9 +200,11 @@ if __name__ == '__main__':
     if arg_type == 'file':
         # get specific extension in file_lists
         nfd_lists = get_endswith(item_lists, user_input.extension)
+        # print(item_lists)
+        # print(user_input.extension)
         # print(nfd_lists)
     else:
-        print("[-] ignore extension if type is dir or all")
+        print("[-] notice  : -e is disabled when -t is all or dir")
         print("==================================================")
         nfd_lists = item_lists
     # print(nfd_lists)
@@ -214,5 +229,3 @@ if __name__ == '__main__':
         ## uncomment when code is correctly working.
         ####################################################################
         # os.rename(nfd, nfc)
-
-
