@@ -208,7 +208,7 @@ if __name__ == '__main__':
     for idx, nfc_list in enumerate(nfc_lists):
         nfd = os.path.join(arg_path, nfd_lists[idx])
         nfc = os.path.join(arg_path, nfc_list)
-        print('{0} : {1}'.format(nfd,nfc))
+        print('[-] {0}\n  [=>] {1}'.format(nfd,nfc))
 
         ####################################################################
         ## uncomment when code is correctly working.
