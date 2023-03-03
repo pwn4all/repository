@@ -136,13 +136,6 @@ if __name__ == '__main__':
     arg_type = user_input.type
     arg_recur = user_input.recursive
 
-    ########################################################################
-    ## set arguments for test in IDE
-    ########################################################################
-    # arg_path = '/Users/1109019/Downloads/'
-    # arg_ext = 'txt'
-    # arg_type = 'dir'
-    # arg_recur = 'on'
 
 
     ########################################################################
