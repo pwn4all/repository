@@ -216,6 +216,10 @@ if __name__ == '__main__':
         nfd = os.path.join(arg_path, nfd_lists[idx])
         nfc = os.path.join(arg_path, nfc_list)
         print('{0} : {1}'.format(nfd,nfc))
+
+        ####################################################################
+        ## uncomment when code is correctly working.
+        ####################################################################
         # os.rename(nfd, nfc)
 
 
