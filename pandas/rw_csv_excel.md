@@ -32,7 +32,7 @@ filename = "/app/files/file.csv"
 if not filename.endswith("csv"):
     df = pd.read_excel(filename, engine='openpyxl', dtype={'name':str, 'age':int, 'height': float})
 else:
-    df = pd.read_csv(filename, sep='\t', skiprows=0)
+    df = pd.read_csv(filename, sep='\t', names=['name','age','height'])
 ```
 
 
@@ -45,7 +45,7 @@ filename = "/app/files/file.xlsx"
 if not filename.endswith("csv"):
     df = pd.read_excel(filename, engine='openpyxl', skiprows=[0])
 else:
-    df = pd.read_csv(filename, )
+    df = pd.read_csv(filename, skiprows=0)
 
 
 ## excel ex)
