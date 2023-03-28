@@ -14,7 +14,7 @@ $ diskutil list
    3:        Apple_APFS_Recovery Container disk1         5.4 GB     disk0s3
 .
 .
-/dev/disk2 (external, pyysical):
+/dev/disk2 (external, pyysical):             <== target usb disk
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      FDisk_partition_scheme                        *15.8 GB   disk2
    1:             Apple_HFS VENTURA                      *15.8 GB   disk2
