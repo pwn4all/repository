@@ -61,6 +61,6 @@ $ ls -l /Users/user/.pyenv/versions
 ##########################################################################################
 $ pyenv active py312pandas
 
-(py312pandas) -> $ deactivate
+(py312pandas) -> $ pyenv deactivate
 $
 
