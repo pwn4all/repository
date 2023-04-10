@@ -26,7 +26,7 @@ python3 -m virtualenv [py3tensorflow]
 ##########################################################################################
 source ./[py2tensorflow]/bin/activate
 
-(py2tensorflow) -> $
+(py2tensorflow) $
 
 
 ##########################################################################################
@@ -34,7 +34,7 @@ source ./[py2tensorflow]/bin/activate
 ##########################################################################################
 source ./[py2tensorflow]/bin/activate
 
-(py2tensorflow) -> $ deactivate
+(py2tensorflow) $ deactivate
 $
 
 
@@ -43,4 +43,5 @@ $
 ##########################################################################################
 $ ls
 [py2tensorflow]
+
 $ rm -rf [py2tensorflow]
