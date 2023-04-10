@@ -59,7 +59,7 @@ $ ls -l /Users/user/.pyenv/versions
 ##########################################################################################
 ## activate/deactivate virtual_name
 ##########################################################################################
-$ pyenv active py312pandas
+$ pyenv activate py312pandas
 
 (py312pandas) -> $ pyenv deactivate
 $
