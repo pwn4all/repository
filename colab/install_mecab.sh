@@ -12,7 +12,7 @@
 !curl -s https://raw.githubusercontent.com/teddylee777/machine-learning/master/99-Misc/01-Colab/mecab-colab.sh | bash
 or
 # below script
-!curl -s https://raw.githubusercontent.com/pwn4all/repository/master/colab/install-mecab-colab.sh | bash
+!curl -s https://raw.githubusercontent.com/pwn4all/repository/master/colab/install-mecab-script.sh | bash
 
 
 ##########################################################################################
