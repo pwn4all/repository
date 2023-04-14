@@ -4,7 +4,7 @@
 ##########################################################################################
 ## install-mecab-colab.sh need to root permission
 ## usage :
-## !cd /tmp && curl -s https://raw.githubusercontent.com/pwn4all/repository/master/colab/install-mecab-colab.sh | bash
+## curl -s https://raw.githubusercontent.com/pwn4all/repository/master/colab/install-mecab-colab.sh | bash
 ##########################################################################################
 ## https://bitbucket.org/eunjeon/mecab-ko/src/master/README.md
 ## https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz
