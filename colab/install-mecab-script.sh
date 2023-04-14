@@ -2,7 +2,7 @@
 ##########################################################################################
 ## reference : https://raw.githubusercontent.com/teddylee777/machine-learning/master/99-Misc/01-Colab/mecab-colab.sh
 ##########################################################################################
-## install-mecab-colab.sh need to root permission
+## install-mecab-script.sh need to root permission
 ## usage :
 ## curl -s https://raw.githubusercontent.com/pwn4all/repository/master/colab/install-mecab-colab.sh | bash
 ##########################################################################################
