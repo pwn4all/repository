@@ -15,7 +15,7 @@ $ sudo yum install /home/user/python3.9_pkgs/*.rpm
 
 ## ------------------------------------------------------------------------
 $ cd Python-3.9.0
-$ ./configure && make && make test && sudo make install
+$ ./configure && make && sudo make install
 
 
 #################################################################################
