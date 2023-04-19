@@ -3,7 +3,7 @@
 #### &#42; podman manual : <https://podman.io/getting-started/installation#macos>
 #### &#42; update resource
 ```bash
-podman machine start
+podman machine stop
 .
 .
 # set cpu count to 4 on podman-machine-default
@@ -11,11 +11,7 @@ podman machine set podman-machine-default --cpus=4
 
 # set memory to 16G on podman-machine-default
 podman machine set podman-machine-default --memory=16384
-
-
-docker start centos7
-podman update --cpus 4 --memory=16384 centos7
-
+# ------------------------------------------------------------------------------------
 $ tail $HOME/.config/containers/podman/machine/qemu/podman-machine-default.json
  "CPUs": 4,
  "DiskSize": 100,
@@ -27,6 +23,16 @@ $ tail $HOME/.config/containers/podman/machine/qemu/podman-machine-default.json
  "Created": "2023-04-14T14:12:59.193517+09:00",
  "LastUp": "2023-04-19T14:05:45.154027+09:00"
 }%
+# ------------------------------------------------------------------------------------
+
+podman machine start
+.
+.
+docker start centos7
+podman update --cpus 4 --memory=16384 centos7
+docker start centos7
+
+
 ```
 
 
