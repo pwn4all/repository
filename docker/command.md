@@ -1,5 +1,35 @@
 # &#35; commands of docker usage
 
+#### &#42; podman manual : <https://podman.io/getting-started/installation#macos>
+#### &#42; update resource
+```bash
+podman machine start
+.
+.
+# set cpu count to 4 on podman-machine-default
+podman machine set podman-machine-default --cpus=4
+
+# set memory to 16G on podman-machine-default
+podman machine set podman-machine-default --memory=16384
+
+
+docker start centos7
+podman update --cpus 4 --memory=16384 centos7
+
+$ tail $HOME/.config/containers/podman/machine/qemu/podman-machine-default.json
+ "CPUs": 4,
+ "DiskSize": 100,
+ "Memory": 16384,
+ "IdentityPath": "/Users/dky/.ssh/podman-machine-default",
+ "Port": 49833,
+ "RemoteUsername": "core",
+ "Starting": false,
+ "Created": "2023-04-14T14:12:59.193517+09:00",
+ "LastUp": "2023-04-19T14:05:45.154027+09:00"
+}%
+```
+
+
 #### &#42; Docker manual : <https://docs.docker.com/engine/reference/commandline/docker/>
 #### &#42; help usage
 ```bash
