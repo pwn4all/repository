@@ -1,3 +1,7 @@
+
+##################################################################################################################
+## make file to json(dict)
+##################################################################################################################
 #!/usr/bin/env python3
 import json
 
@@ -49,3 +53,33 @@ values : dict_values(['hello python', 'bonjour python', 'hola pitón'])
 str_dict = '{"key": "value"}' => Good
 str_dict = "{'key': 'value'}" => Error
 """
+
+
+
+##################################################################################################################
+## make string to json
+## ensure_ascii=False (in case : '\ud638')
+##################################################################################################################
+json_str = {}
+for aslist in exp.as_list():
+    print("text: {}, accuracy: {}".format(aslist[0], aslist[1]))
+    json_str[aslist[0]] = aslist[1]
+
+print(json_str)
+with open('result.txt', 'w', encoding='utf-8') as fd:
+    fd.writelines(json.dumps(json_str, ensure_ascii=False))
+    
+    
+    
+'''
+// json.dumps(json_str)
+text: 호성, accuracy: 0.010036775105527087
+text: 무료거부0808705900, accuracy: 0.0071254159741973265
+"{\"\\ud638\\uc131\": 0.010036775105527087, \"\\ubb34\\ub8cc\\uac70\\ubd800808705900\": 0.0071254159741973265}"
+
+// json.dumps(json_str, ensure_ascii=False)
+text: 호성, accuracy: 0.010036775105527087
+text: 무료거부0808705900, accuracy: 0.0071254159741973265
+{'호성': 0.010062686019422755, '무료거부0808705900': 0.0071254159741973265}
+
+'''
