@@ -188,6 +188,27 @@ docker images
 
 
 * * *
+#### 4. docker hub registry/repository
+#### step 1 : save container to image
+```bash
+## docker commit [container_name/id] image_name:latest
+docker commit ubuntu2004 my_ubuntu2004:0.01
+docker images
+```
+
+#### step 2 : login
+```bash
+## podman login docker.io
+docker login docker.io
+```
+
+#### step 3 : push image to docker.io
+```bash
+## podman push image:latest
+docker push my_ubuntu2004:0.01
+```
+
+* * *
 #### 5. aslr/nx off (systemctl command)
 #### step 1 : connect to docker
 ```bash
