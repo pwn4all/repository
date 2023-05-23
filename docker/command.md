@@ -191,8 +191,8 @@ docker images
 #### 5. save my image to docker hub registry/repository
 #### step 1 : save container to image
 ```bash
-## docker commit [container_name/id] image_name:latest
-docker commit ubuntu2004 pwn4all/my_ubuntu2004:0.01
+## docker commit [--platform linux/amd64] [container_name/id] image_name:latest
+docker commit [--platform linux/amd64] ubuntu2004 pwn4all/my_ubuntu2004:0.01
 docker images
 ```
 
