@@ -1,5 +1,5 @@
 # Ubuntu 23.04 (python3.11)
-***
+
 ##### 기본 업데이트
 ```bash
 $ sudo apt update
@@ -66,4 +66,4 @@ $ source /venv/python311/bin/activate
 ```
 
 ##### libc database
-<kbd style="background-color: #f0f0f0; font-size: 14px;"><a href="https://libc.blukat.me/" target="_blank">https://libc.blukat.me/</a></kbd>
+<kbd style="background-color: #f0f0f0; font-size: 18px;"><a href="https://libc.blukat.me/" target="_blank">https://libc.blukat.me/</a></kbd>
