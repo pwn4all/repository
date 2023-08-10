@@ -4,6 +4,14 @@
 ```bash
 $ sudo apt update
 $ sudo apt install vim
+$ sudo apt install openssh-server
+$ sudo vi /etc/ssh/sshd_config
+.
+.
+PasswordAuthentication yes
+.
+.
+$ sudo systemctl restart ssh
 ```
 
 
