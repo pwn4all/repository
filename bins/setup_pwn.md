@@ -66,4 +66,8 @@ $ source /venv/python311/bin/activate
 ```
 
 ##### libc database
-<kbd style="background-color: #f0f0f0; font-size: 18px;"><a href="https://libc.blukat.me/" target="_blank">https://libc.blukat.me/</a></kbd>
+<kbd style="background-color: #f0f0f0; font-size: 14px;">
+  <a href="https://libc.blukat.me/" target="_blank">
+    <span style="font-size: 18px;">https://libc.blukat.me/</span>
+  </a>
+</kbd>
