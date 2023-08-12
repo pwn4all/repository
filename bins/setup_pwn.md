@@ -12,6 +12,16 @@ PasswordAuthentication yes
 .
 .
 $ sudo systemctl restart ssh
+
+
+$ sudo vi /etc/vim/vimrc
+.
+.
+"====================================================================
+set tabstop=2
+set shiftwidth=2
+set expandtab
+"====================================================================
 ```
 
 
