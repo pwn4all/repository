@@ -31,5 +31,4 @@ next(libc.search(b'/bin/sh\x00'))
 ```python
 system_offset = libc.sym["system"]
 system_addr = libc_base + system_offset
-system_addr = libc_base + system_offset
 ```
