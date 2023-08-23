@@ -31,18 +31,20 @@ $ iconv -c -f cp949 -t utf8 source.txt > source.log
 #!/bin/bash
 
 # 디렉토리 내의 모든 txt 파일을 순회하며 Encoding 변경
-if [ $# -ne 2 ]; then
-        echo "Usage: $0 From(ex.UTF-8) To(ex.EUC-KR)"
+if [ $# -ne 4 ]; then
+        echo "Usage: $0 From(UTF-8..) To(EUC-KR..) From_Ext(txt) To_Ext(euckr)"
         exit -1
 fi
 
 # 처리 대상 확장자 euckr/txt 등 수정 필요
-for txt_file in *.euckr; do
+FROM_EXT=$3
+TO_EXT=$4
+for txt_file in *.$FROM_EXT; do
     # 확장자를 제외한 파일명만 추출
     filename="${txt_file%.*}"
 
-    echo $txt_file
     # argv[1]인코딩을 argv[2] 인코딩으로 변경
-    /usr/bin/iconv -c -f $1 -t $2 $filename.euckr -o $filename.txt
+    /usr/bin/iconv -c -f $1 -t $2 $filename.$FROM_EXT -o $filename.$TO_EXT
+    echo "$filename.$FROM_EXT => $filename.$TO_EXT"
 done
 ```
