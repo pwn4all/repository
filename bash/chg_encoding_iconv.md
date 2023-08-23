@@ -11,7 +11,7 @@ $ file --mime-encoding filename.log
 ./filename.log: utf-8
 ```
 
-# iconv 명령어로 인코딩 변환
+## iconv 명령어로 인코딩 변환
 ```bash
 #################################################################
 ## change encoding
