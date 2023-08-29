@@ -1,11 +1,11 @@
 
 
-# &#35; Excel processing
+# &#35; 엑셀과 CSV 는 유사하게 처리됩니다.
 [pandas.read_excel manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html)
 [pandas.read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)
 
 
-#### &#42; basically read xlsx/xls/csv file
+#### &#42; xlsx/xls/csv 파일 읽기
 ```python
 import pandas as pd
 
@@ -16,12 +16,15 @@ filename = "/app/files/file.csv"
 df = None
 
 if not filename.endswith("csv"):
-    df = pd.read_excel(filename, engine='openpyxl')
+    column_names=['name', 'age', 'height']
+    df = pd.read_excel(filename, names=column_names, header=0)
+    # engine='openpyxl|python'
 else:
-    df = pd.read_csv(filename)
+    df = pd.read_csv(filename, names=column_names, sep='\t', header=None, \
+                on_bad_lines='warn', skiprows=1, skipfooter=2, engine='python')
 ```
 
-#### &#42; define data type for specific cell
+#### &#42; 특정 셀의 데이터 타입 정의
 ```python
 import pandas as pd
 
@@ -36,7 +39,7 @@ else:
 ```
 
 
-#### &#42; read xlsx/xls/csv file except n row
+#### &#42; 특정 행을 제외하고 xlsx/xls/csv 읽기
 ```python
 import pandas as pd
 
@@ -63,7 +66,7 @@ date | message | filename | msg_type    => column name of dataframe
 ```
 
 
-#### &#42; basically write xlsx/xls/csv file
+#### &#42; xlsx/xls/csv 로 쓰기
 ```python
 filename = "/app/files/file.xlsx"
 filename = "/app/files/file.xls"
