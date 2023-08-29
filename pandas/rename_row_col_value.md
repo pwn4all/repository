@@ -1,4 +1,4 @@
-# &#35; rename column/row name and value
+# &#35; 행(row)/열(column)명과 값 변경
 [pandas.DataFrame.rename manual](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.rename.html)
 
 #### &#42; set dataframe
