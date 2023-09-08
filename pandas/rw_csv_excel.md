@@ -20,8 +20,9 @@ if not filename.endswith("csv"):
     df = pd.read_excel(filename, names=column_names, header=0)
     # engine='openpyxl|python'
 else:
+    # Error tokenizing data. C error : lineterminator='\n'
     df = pd.read_csv(filename, names=column_names, sep='\t', header=None, \
-                on_bad_lines='warn', skiprows=1, skipfooter=2, engine='python')
+                on_bad_lines='warn', lineterminator='\n', skiprows=1, skipfooter=2, engine='python')
 ```
 
 #### &#42; 특정 셀의 데이터 타입 정의
