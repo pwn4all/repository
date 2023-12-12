@@ -9,10 +9,12 @@
 sudo chown -R $(whoami):admin /usr/local/* \
 && sudo chmod -R g+rwx /usr/local/*
 
-# 2. 전체 brew list reinstall
+# 2. 명령어 다시 실행해도 안되면 3번의 brew 재설치
+brew cleanup/upgrade
 
-brew list --formula | xargs brew reinstall
-or
+
+# 3. 전체 brew 재설치
+
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
