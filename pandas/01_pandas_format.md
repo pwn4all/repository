@@ -17,10 +17,9 @@ from tqdm import tqdm
 ##################################################################
 ## xlsx/csv 파일 읽기
 ##################################################################
-def read_file(filename_):
-    column_names = ['category', 'result', 'code', 'text']
+def read_file(filename_, column_names_):
     if filename_.endswith('xlsx'):
-        df_ = pd.read_excel(filename_, names=column_names, \
+        df_ = pd.read_excel(filename_, names=column_names_, \
                            header=0, sheet_name='label')#, skiprows=[0])
     elif filename_.endswith('csv'):
         df_ = pd.read_csv(os.path.join(cnn_result_dir, input_xlsx), sep='\t', header=None, \
@@ -33,20 +32,26 @@ def read_file(filename_):
 ```
 
 
-* ### 파일(csv/xlsx) 읽기
+* ### 파일(csv/xlsx) 쓰기
 ```python
 ##################################################################
-## xlsx/csv 파일 읽기
+## xlsx/csv/txt 파일 쓰기
 ##################################################################
-def read_file(filename_, column_names_):
+def write_file(filename_, df_):
+    column_names_ = ['category', 'result', 'code', 'text']
     if filename_.endswith('xlsx'):
-        df_ = pd.read_excel(filename_, names=column_names, \
-                           header=0, sheet_name='label')#, skiprows=[0])
-    elif filename_.endswith('csv')
-        df_ = pd.read_csv(os.path.join(cnn_result_dir, input_xlsx), sep='\t', header=None, \
-                         names=column_names, on_bad_lines='warn', lineterminator='\n', \
-                         # skiprows=1, skipfooter=2, engine='python', \)
-                         )
+        with pd.ExcelWriter(filename_) as writer:
+            # df_.to_excel(writer, index=False, columns=column_names_)
+            df_.to_excel(writer, index=False)
+    elif filename_.endswith('csv'):
+        df_.to_csv(filename_, sep='\t', columns=column_names_, header=False, index=False)
+    elif filename_.endswith('txt'):
+        with open(filename_, 'w', encoding="utf-8") as fd:
+        # with open(filename_, 'w', encoding="euc-kr") as fd:
+            for msg_ in df_['text']:
+                fd.write(msg_ + '\n')
+    else:
+        print("only xlsx or csv or txt!!!")
 
 ```
 
@@ -101,7 +106,8 @@ print(df.shape)
 
 
 ##################################################################
-## df['text'] 컬럼에서 " 꼬임이 발생하는 경우 제거 
+## df['text'] 컬럼에서 " 꼬임이 발생하는 경우 제거 예제
+## " 가 꼬여서 여러 셀이 한 셀로 합쳐졌을 수 있으므로, 매번 실행이 좋음
 ##################################################################
 df_text = rm_ambiguity_of_quote(df, 'text')
 
