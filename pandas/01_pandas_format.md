@@ -1,7 +1,7 @@
 ## pandas 에서 csv 와 xlsx 를 다루는 뼈대 코드 구조
 
 
-#### *패키지 선언
+#### * 패키지 선언
 ```python
 import os
 import csv
