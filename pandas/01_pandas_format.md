@@ -22,7 +22,7 @@ def read_file(filename_):
     if filename_.endswith('xlsx'):
         df_ = pd.read_excel(filename_, names=column_names, \
                            header=0, sheet_name='label')#, skiprows=[0])
-    elif filename_.endswith('csv')
+    elif filename_.endswith('csv'):
         df_ = pd.read_csv(os.path.join(cnn_result_dir, input_xlsx), sep='\t', header=None, \
                          names=column_names, on_bad_lines='warn', lineterminator='\n', \
                          # skiprows=1, skipfooter=2, engine='python', \)
