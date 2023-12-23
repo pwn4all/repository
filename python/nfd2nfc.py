@@ -6,226 +6,60 @@ import argparse
 import unicodedata
 
 
-def get_argv():
-    '''
-    :check arguments
-    :return: user's arguments
-    '''
-    parser = argparse.ArgumentParser(description='NFD to NFC')
-    parser.add_argument('-p', '--path', type=str, default='EMPTY', help='-p /home/user/ (default : ./)')
-    parser.add_argument('-e', '--extension', type=str, default='all', help='-e all|txt|xlsx|...')
-    parser.add_argument('-t', '--type', type=str, default='all', help='-t all|dir|file')
-    parser.add_argument('-r', '--recursive', type=str, default='off', nargs='*', help='-r [on|off]')
+####################################################################
+## 파일명을 NFC 를 NFD 로 변경
+####################################################################
+def normalize_filename(file_path):
+    # 파일명에서 디렉터리 경로와 파일명을 분리
+    directory, filename = os.path.split(file_path)
 
-    return parser.parse_args()
+    # NFC로 정규화한 파일명 생성
+    normalized_filename = unicodedata.normalize('NFC', filename)
 
+    # 디렉터리와 정규화된 파일명을 합쳐서 새로운 파일 경로 생성
+    normalized_file_path = os.path.join(directory, normalized_filename)
 
-def chk_extension(extension):
-    '''
-    :add dot if not startswith(dot)
-    :param extension: ex)txt, .txt
-    :return: .txt
-    '''
-    dot = '.'
-    if not extension.startswith(dot):
-        # print('extension : {}'.format('.'+extension))
-        # print(f'extension : {dot+extension}')
-        return dot+extension
-    else:
-        return extension
+    # 파일명 변경
+    os.rename(file_path, normalized_file_path)
+    print(f"[+] {file_path} -> {normalized_file_path}")
 
 
-def get_filelists(path):
-    '''
-    :param path: String(path)
-    :return: file/dir lists in path
-    '''
-    return os.listdir(path)
+####################################################################
+## 변경 대상 파일명 찾아서 normalize_filename() 호출
+####################################################################
+def normalize_filenames_in_directory(directory, recursive=False, target_extension=None):
+    for dirpath, dirnames, filenames in os.walk(directory):
+        for filename in filenames:
+            file_path = os.path.join(dirpath, filename)
+
+            # 특정 확장자에 해당하는 파일만 변경
+            if target_extension is None or file_path.lower().endswith(target_extension.lower()):
+                normalize_filename(file_path)
+
+        # 만약 recursive 옵션이 비활성화되었으면, 하위 디렉터리의 탐색을 중단
+        if not recursive:
+            break
 
 
-item_recursive = list()
-def get_recursive(path):
-    files = os.listdir(path)
-    for file in files:
-        item_path = os.path.join(path, file)
-        # print(item_path)
-        item_recursive.append(item_path)
-        # recursive search in case of dir
-        if os.path.isdir(item_path):
-            get_recursive(item_path)
-            # print(item_path)
-    # print(item_lists)
-    return item_recursive
+####################################################################
+## 인자 설정 및 변경 코드 호출
+####################################################################
+def main():
+    parser = argparse.ArgumentParser(description='Change NFD to NFC for filenames.')
+    parser.add_argument('-d', '--directory', type=str, default='./', help='Target directory (default: ./)')
+    parser.add_argument('-r', '--recursive', type=str, default='false', choices=['true', 'false'],
+                        help='Enable or disable recursive search (default: false)')
+    parser.add_argument('-e', '--extension', type=str, default=None,
+                        help='Target file extension to change (default: None)')
 
+    args = parser.parse_args()
 
-def get_endswith(itemlists, format):
-    '''
-    :param itemlists: return lists of get_filelists()
-    :param format: list(itemlists), String(format)
-    :return:
-    '''
+    target_directory = args.directory
+    recursive = args.recursive.lower() == 'true'
+    target_extension = args.extension
 
-    if format != None and format != '.all':
-        lists = list()
-        for itemlist in itemlists:
-            if(itemlist.endswith(format)):
-                lists.append(itemlist)
-        return lists
-    else:
-        return itemlists
-
-
-def chg_itemname(itemnames):
-    itemlists = list()
-    for itemname in itemnames:
-        itemlists.append(unicodedata.normalize('NFC', itemname))
-        # print(unicodedata.normalize('NFC', itemname))
-    return itemlists
-
-
-def chk_filetype(type, filepath, filelists):
-    if type == 'all':
-        # print("chk_filetype(all) : " + type)
-        return filelists
-    else:
-        select_lists = list()
-        print(filelists)
-        for filelist in filelists:
-            if type == 'file':
-                if os.path.isfile(filepath+filelist):
-                    select_lists.append(filelist)
-                    # print('chk_filetype(file) : ' + filelist)
-            elif type == 'dir':
-                if os.path.isdir(filepath+filelist):
-                    select_lists.append(filelist)
-                    # print('chk_filetype(dir) : ' + filelist)
-        # print(select_lists)
-        return select_lists
-
-
-def chk_recurtype(type, filelists):
-    if type == 'all':
-        # print("chk_recurtype(all) : " + type)
-        return filelists
-    else:
-        select_lists = list()
-        # print(filelists)
-        for filelist in filelists:
-            if type == 'file':
-                if os.path.isfile(filelist):
-                    select_lists.append(filelist)
-                    # print('chk_recurtype(file) : ' + filelist)
-            elif type == 'dir':
-                if os.path.isdir(filelist):
-                    select_lists.append(filelist)
-                    # print('chk_recurtype(dir) : ' + filelist)
-        # print(select_lists)
-        return select_lists
-
-
-def print_usage():
-    print("[+] usage : python3 nfd2nfc.py --help")
-    print("[#] usage : python3 nfd2nfc.py -p /home/user -e all|txt|xlsx|... -t all|dir|file [-r [on|off]]")
-
+    # 디렉터리 내의 특정 확장자를 가진 파일들의 이름을 NFC로 정규화
+    normalize_filenames_in_directory(target_directory, recursive, target_extension)
 
 if __name__ == '__main__':
-    ########################################################################
-    ## set arguments
-    ########################################################################
-    user_input = get_argv()
-
-    if user_input.path == 'EMPTY':
-        import sys
-        print_usage()
-        sys.exit(0)
-
-    arg_path = user_input.path
-    if not arg_path.endswith('/'):
-        arg_path += '/'
-    arg_ext = user_input.extension
-    arg_type = user_input.type
-    if len(user_input.recursive) == 0:
-        arg_recur = 'off'
-    else:
-        arg_recur = user_input.recursive
-
-
-
-    ########################################################################
-    ## print arguments
-    ########################################################################
-    print("=================== Arguments ====================")
-    print_usage()
-    print("==================================================")
-    print("[+] path : {}".format(arg_path))
-    print("[+] extension : {}".format(arg_ext))
-    print("[+] type : {}".format(arg_type))
-    print("[+] recursive : {}".format(arg_recur))
-    print("==================================================")
-
-
-    ########################################################################
-    ## add dot(.) when doesn't have dot(.) in user_input.extension
-    ## ex) doc -> .doc , txt -> .txt
-    ########################################################################
-    if len(arg_ext) > 0:
-        user_input.extension = chk_extension(arg_ext)
-    # print(f'{user_input.path} : {user_input.extension}')
-
-    ########################################################################
-    ## get lists specific dir or recursive
-    ########################################################################
-    if arg_recur == 'off':
-        # get dir/file lists in specific path
-        file_lists = get_filelists(user_input.path)
-    else:
-        file_lists = get_recursive(arg_path)
-        # print(file_lists)
-    # print(file_lists)
-
-
-    ########################################################################
-    ## get lists for a case of type is dir/file/all
-    ########################################################################
-    if arg_recur == 'off':
-        item_lists = chk_filetype(arg_type, arg_path, file_lists)
-    else:
-        item_lists = chk_recurtype(arg_type, file_lists)
-    # print(item_lists)
-
-
-    ########################################################################
-    ## filter extension for only file
-    ########################################################################
-    if arg_type == 'file':
-        # get specific extension in file_lists
-        nfd_lists = get_endswith(item_lists, user_input.extension)
-        # print(item_lists)
-        # print(user_input.extension)
-        # print(nfd_lists)
-    else:
-        print("[-] notice  : -e is disabled when -t is all or dir")
-        print("==================================================")
-        nfd_lists = item_lists
-    # print(nfd_lists)
-
-
-    ########################################################################
-    ## change dir/file name to NFD
-    ########################################################################
-    nfc_lists = chg_itemname(nfd_lists)
-    # print(nfc_lists)
-
-
-    ########################################################################
-    ## save to be changed NFD format name
-    ########################################################################
-    for idx, nfc_list in enumerate(nfc_lists):
-        nfd = os.path.join(arg_path, nfd_lists[idx])
-        nfc = os.path.join(arg_path, nfc_list)
-        print('[-] {0}\n  [=>] {1}'.format(nfd,nfc))
-
-        ####################################################################
-        ## uncomment when code is correctly working.
-        ####################################################################
-        # os.rename(nfd, nfc)
+    main()
