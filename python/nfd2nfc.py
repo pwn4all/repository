@@ -45,8 +45,11 @@ def normalize_filenames_in_directory(directory, recursive=False, target_extensio
 ## 인자 설정 및 변경 코드 호출
 ####################################################################
 def main():
-    parser = argparse.ArgumentParser(description='Change NFD to NFC for filenames.')
-    parser.add_argument('-d', '--directory', type=str, default='./', help='Target directory (default: ./)')
+    parser = argparse.ArgumentParser(
+        description='Normalize Korean filenames in a directory.',
+        usage='%(prog)s <directory> [-r|--recursive {true|false}] [-e|--extension <extension>]'
+    )
+    parser.add_argument('directory', metavar='directory', type=str, help='The target directory')
     parser.add_argument('-r', '--recursive', type=str, default='false', choices=['true', 'false'],
                         help='Enable or disable recursive search (default: false)')
     parser.add_argument('-e', '--extension', type=str, default=None,
