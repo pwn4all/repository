@@ -53,3 +53,5 @@ echo 'export LANG=ko_KR.eucKR' >> ~/.bashrc
 source ~/.bashrc
 
 localectl set-locale LANG=ko_KR.eucKR
+
+locale
