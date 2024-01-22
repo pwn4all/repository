@@ -63,6 +63,28 @@ $ vi texts.csv
 # COLUMN3 의 마지막에 있는 " 를 삭제해서 " 꼬임 상황 제거
 :%s/"$//g
 ```
+or
+```python
+##################################################################
+## xlsx나 csv 를 읽을 때, 문장의 구분자에 영향을 주는 " 와 ' 를 제거
+##################################################################
+def rm_ambiguity_of_quote(df_, col_name):
+    # 문장의 처음과 마지막에 있는 공백 제거
+    df_[col_name] = df_[col_name].apply(lambda x: x.strip(' ') if x.startswith(' ') or x.endswith(' ') else x)
+    # 문장의 처음에 "가 있는 경우 pandas 로 셀을 나눌 때, csv 포맷이 꼬임 방지
+    df_[col_name] = df_[col_name].apply(lambda x: x.strip('"') if x.startswith('"') or x.endswith('"') else x)
+    # 'text' 열에서 "가 2개 이상 연속으로 있는 경우 " 하나로 변경
+    df_[col_name] = df_[col_name].str.replace(r'"+', '"', regex=True)
+    df_[col_name] = df_[col_name].apply(lambda x: x.strip("'") if x.startswith("'") or x.endswith("'") else x)
+    # 'text' 열에서 "가 2개 이상 연속으로 있는 경우 " 하나로 변경
+    df_[col_name] = df_[col_name].str.replace(r"'+", "'", regex=True)
+    # 'text' 열에서 \n 이 있는 경우 제거
+    df_[col_name] = df_[col_name].str.replace(r'\n', ' ', regex=True)
+
+    df_[~df_['text'].isnull()]
+
+    return df_
+```
 
 #### 문제점 : pandas 로 읽는 과정에서 COLUMN3 에 있는 글자가 " 이 꼬이면 vi 로 읽었을 때는 10줄이지만 pandas/엑셀/Numbers/CSV 편집기로 열면 아래와 같이 줄이 꼬여서 5줄보다 적은 줄로 파일이 오픈되는 상황이 발생할 수 있다.
 ```
