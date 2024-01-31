@@ -30,7 +30,7 @@ Last login: Wed Jan 31 07:57:10 2024 from 192.168.0.20
 ```bash
 # 명령어 형식
 # ssh -p[경유서버 Listen port] [목적서버 id]@[경유서버IP]
-$ ssh -p2222 username@20.20.20.20
+$ ssh -p2222 user@20.20.20.20
 (user@192.168.0.30) Password:  **(목적서버 user 비밀번호 입력)**
 Last login: Wed Jan 31 07:57:10 2024 from 192.168.0.20
 
