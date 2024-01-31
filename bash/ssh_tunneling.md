@@ -1,7 +1,8 @@
 안녕하세요. SSH 포트 포워딩 방법을 소개해 드립니다.
 
 1. 개념도
-    ![image.png](https://devocean.sk.com/editorImg/2024/1/31/2e240358164c3f6e40190b031e329f2f5b32e07c1081ebd9065268d61d04bf29)
+    ![image](https://github.com/pwn4all/repository/assets/66910989/622c801a-9e71-4496-b4d3-ec70ff59b5da)
+
 2. 개념도 개략 설명
 
 * 경유서버에서 목적서버로 SSH Tunneling 설정을 하고
