@@ -1,21 +1,42 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from flask import Flask, send_file
+from flask import Flask, request, jsonify
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 
+# 파일이 저장될 경로 설정
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route('/img/<filename>')
-def download_file(filename):
-    # 파일이 저장된 경로를 지정해주세요.
-    file_path = f'{filename}'
+# 폴더가 존재하지 않으면 생성
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
-    # Flask의 send_file 함수를 사용하여 파일을 다운로드합니다.
-    return send_file(file_path, as_attachment=True)
+@app.route('/img/<filename>', methods=['POST'])
+def save_file(filename):
+    # 요청에서 파일을 가져옴
+    file = request.files['file']
+
+    if file:
+        # 파일 이름을 안전하게 만듦
+        filename = secure_filename(filename)
+
+        # 파일을 저장할 경로 설정
+        save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        # 파일 저장
+        file.save(save_path)
+
+        return jsonify(message=f"File '{filename}' uploaded successfully."), 200
+    else:
+        return jsonify(message="No file provided."), 400
+
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', debug=True, port=8448)
-    app.run(ssl_context=('forbidden.config/cert.pem', 'forbidden.config/key.pem'), host='0.0.0.0', debug=True, port=8448)
+    #app.run(host='0.0.0.0', debug=True, port=8448)
+    app.run(ssl_context=('cert.pem', 'key.pem'), host='0.0.0.0', debug=True, port=8448)
 
 
 ##################################################################
@@ -34,25 +55,18 @@ if __name__ == '__main__':
 ##################################################################
 import requests
 
-# Flask 서버의 주소 및 포트
-base_url = "http://localhost:8448/img/"
+# 서버의 URL (HTTPS를 사용)
+url = "https://yourserver.com/img/your_file.xlsx"
 
-# 다운로드 받고 싶은 파일 이름
-filename = "example.jpg"
+# 업로드할 파일
+files = {'file': open('your_file.xlsx', 'rb')}
 
-# 파일을 다운로드 받을 URL
-url = base_url + filename
+# SSL 인증서 검증을 건너뛰고 파일 업로드를 위한 POST 요청
+# 보안상의 이유로 실제 운영 환경에서는 verify 인자를 생략하거나 적절한 CA 번들을 지정하는 것이 좋습니다.
+#response = requests.post(url, files=files, verify=False)
+response = requests.post(url, files=files, verify=False)
 
-# 서버에 GET 요청을 보내 파일을 다운로드 받음
-response = requests.get(url)
-
-# 응답이 성공적인지 확인
-if response.status_code == 200:
-    # 받은 데이터로 파일을 저장
-    with open(filename, 'wb') as f:
-        f.write(response.content)
-    print(f"File '{filename}' has been downloaded successfully.")
-else:
-    print(f"Failed to download the file. Status code: {response.status_code}")
+# 응답 출력
+print(response.text)
 
 
