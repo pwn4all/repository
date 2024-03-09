@@ -14,7 +14,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-@app.route('/img/<filename>', methods=['POST'])
+@app.route('/post/<filename>', methods=['POST'])
 def save_file(filename):
     # 요청에서 파일을 가져옴
     file = request.files['file']
