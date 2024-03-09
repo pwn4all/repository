@@ -22,3 +22,37 @@ if __name__ == '__main__':
 ## how to generate cert.pem and key.pem
 ##################################################################
 # openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 3650
+
+
+
+
+
+
+
+##################################################################
+## below is client code
+##################################################################
+import requests
+
+# Flask 서버의 주소 및 포트
+base_url = "http://localhost:8448/img/"
+
+# 다운로드 받고 싶은 파일 이름
+filename = "example.jpg"
+
+# 파일을 다운로드 받을 URL
+url = base_url + filename
+
+# 서버에 GET 요청을 보내 파일을 다운로드 받음
+response = requests.get(url)
+
+# 응답이 성공적인지 확인
+if response.status_code == 200:
+    # 받은 데이터로 파일을 저장
+    with open(filename, 'wb') as f:
+        f.write(response.content)
+    print(f"File '{filename}' has been downloaded successfully.")
+else:
+    print(f"Failed to download the file. Status code: {response.status_code}")
+
+
