@@ -13,6 +13,7 @@ $ git config --global credential.helper cache|store
 ##########################################################################################
 ## access token 을 이용한 remote 저장소 설정
 ##########################################################################################
+$ git remote add origin https://gitlab.mygit.com/user/mypackage.git
 $ git remote set-url origin https://oauth2:access-token-string@gitlab.mygit.com/user/mypackage.git
 
 
