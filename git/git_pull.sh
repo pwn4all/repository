@@ -1,37 +1,55 @@
 ##########################################################################################
 ## git 초기화
 ##########################################################################################
-$ git init
+rm README.md
+git init
+git add .
+git commit -m "NW_SDP INIT"
 
 
 ##########################################################################################
 ## git 자격증명 관리 방법(cache|store)
 ##########################################################################################
-$ git config --global credential.helper cache|store
+git config --global credential.helper cache|store
+
+
+
+##########################################################################################
+## origin 제거 (error: remote origin already exists. 에러 처리)
+##########################################################################################
+git remote remove origin
+
 
 
 ##########################################################################################
 ## access token 을 이용한 remote 저장소 설정
 ##########################################################################################
-$ git remote add origin https://gitlab.mygit.com/user/mypackage.git
-$ git remote set-url origin https://oauth2:access-token-string@gitlab.mygit.com/user/mypackage.git
+git remote add origin https://oauth2:ynSuHhsoMn-jYD7PG7eM@gitlab.localhost.com/packages.git
+
+git remote set-url origin https://oauth2:ynSuHhsoMn-jYD7PG7eM@gitlab.localhost.com/packages.git
+
+
+git remote -v
 
 
 ##########################################################################################
 ## remote 브랜치 위에 local commit 을 재적용
 ## rebase 는 혼자 사용할 때만 사용(개발자가 여러명일 경우 git config pull.merge 사용)
 ##########################################################################################
-$ git config pull.rebase true
+git config pull.rebase true
 
+
+git branch -M main
 
 ##########################################################################################
 ## remote 저장소에서 pull
 ##########################################################################################
-$ git pull origin main
+git pull origin main
+
 From https://gitlab.tde.sktelecom.com/user/mypackage
  * branch            main       -> FETCH_HEAD
 Successfully rebased and updated refs/heads/main.
-$ ls
+ls
 README.md      __pycache__    message.txt    thread.py     upload
 
 
@@ -39,7 +57,8 @@ README.md      __pycache__    message.txt    thread.py     upload
 ## 로컬 저장소의 'main' 브랜치를 원격 저장소의 'origin' 저장소에 푸시(업로드)하고
 ## 원격 저장소와 브랜치를 자동으로 추적하도록(-u) 설정 
 ##########################################################################################
-$ git push -uf origin main
+git push -uf origin main
+
 Enumerating objects: 100, done.
 Counting objects: 100% (100/100), done.
 Delta compression using up to 10 threads
