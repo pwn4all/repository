@@ -4,13 +4,13 @@
 rm README.md
 git init
 git add .
-git commit -m "NW_SDP INIT"
+git commit -m "SERVICE"
 
 
 ##########################################################################################
 ## git 자격증명 관리 방법(cache|store)
 ##########################################################################################
-git config --global credential.helper cache|store
+git config --global credential.helper cache
 
 
 
@@ -23,10 +23,11 @@ git remote remove origin
 
 ##########################################################################################
 ## access token 을 이용한 remote 저장소 설정
+## 문법 : https://oauth2:<Access-Token>@domain.name/package.git
 ##########################################################################################
-git remote add origin https://oauth2:ynSuHhsoMn-jYD7PG7eM@gitlab.localhost.com/packages.git
+git remote add origin https://oauth2:AfaU217kyc4m3wemXCpU@gitlab.com/package.git
 
-git remote set-url origin https://oauth2:ynSuHhsoMn-jYD7PG7eM@gitlab.localhost.com/packages.git
+git remote set-url origin https://oauth2:tde2-AfaU217kyc4m3wemXCpU@gitlab.com/package.git
 
 
 git remote -v
@@ -41,16 +42,16 @@ git config pull.rebase true
 
 git branch -M main
 
+
 ##########################################################################################
-## remote 저장소에서 pull
+## remote 저장소에서 pull (README.md 등 서버 파일 pull)
 ##########################################################################################
 git pull origin main
 
 From https://gitlab.tde.sktelecom.com/user/mypackage
  * branch            main       -> FETCH_HEAD
 Successfully rebased and updated refs/heads/main.
-ls
-README.md      __pycache__    message.txt    thread.py     upload
+
 
 
 ##########################################################################################
@@ -69,4 +70,7 @@ remote:
 To https://gitlab.tde.sktelecom.com/user/mypackage.git
    25f9459..3f305ae  main -> main
 branch 'main' set up to track 'origin/main'.
-$
+
+
+
+
