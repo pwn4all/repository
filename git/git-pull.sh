@@ -2,6 +2,7 @@
 ## git 초기화
 ##########################################################################################
 rm README.md
+
 git init
 git add .
 git commit -m "SERVICE"
@@ -48,7 +49,7 @@ git branch -M main
 ##########################################################################################
 git pull origin main
 
-From https://gitlab.tde.sktelecom.com/user/mypackage
+From https:/gitlab.com/package.git
  * branch            main       -> FETCH_HEAD
 Successfully rebased and updated refs/heads/main.
 
@@ -67,7 +68,7 @@ Compressing objects: 100% (89/89), done.
 Writing objects: 100% (99/99), 893.64 KiB | 6.87 MiB/s, done.
 Total 99 (delta 9), reused 0 (delta 0), pack-reused 0
 remote:
-To https://gitlab.tde.sktelecom.com/user/mypackage.git
+To https://gitlab.com/package.git
    25f9459..3f305ae  main -> main
 branch 'main' set up to track 'origin/main'.
 
