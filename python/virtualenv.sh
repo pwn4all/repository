@@ -16,25 +16,26 @@ $ cd [virtualenv]
 ##########################################################################################
 ## create virtual directory
 ##########################################################################################
-python2 -m virtualenv [py2tensorflow]
+python2 -m virtualenv /app/virtualenv/py2lime
+virtualenv -p python2 /app/virtualenv/py2lime
 or
-python3 -m virtualenv [py3tensorflow]
-
+python3 -m virtualenv /app/virtualenv/py3lime
+virtualenv -p python3 /app/virtualenv/py3lime
 
 ##########################################################################################
 ## activate virtualenv
 ##########################################################################################
-source ./[py2tensorflow]/bin/activate
+source /app/[py2lime]/bin/activate
 
-(py2tensorflow) $
+(py2lime) $
 
 
 ##########################################################################################
 ## deactivate virtualenv
 ##########################################################################################
-source ./[py2tensorflow]/bin/activate
+source ./[py2lime]/bin/activate
 
-(py2tensorflow) $ deactivate
+(py2lime) $ deactivate
 $
 
 
@@ -42,6 +43,6 @@ $
 ## delete virtual directory
 ##########################################################################################
 $ ls
-[py2tensorflow]
+[py2tensopy2limerflow]
 
-$ rm -rf [py2tensorflow]
+$ rm -rf /app/py2lime
