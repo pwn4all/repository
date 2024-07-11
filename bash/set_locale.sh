@@ -7,72 +7,28 @@
 $ sudo yum install glibc-common
 
 ########################################################################################
-## view locale
+## setting CentOS 7.9
 ########################################################################################
-$ locale
-LANG=
-LC_CTYPE="POSIX"
-LC_NUMERIC="POSIX"
-LC_TIME="POSIX"
-LC_COLLATE="POSIX"
-LC_MONETARY="POSIX"
-LC_MESSAGES="POSIX"
-LC_PAPER="POSIX"
-LC_NAME="POSIX"
-LC_ADDRESS="POSIX"
-LC_TELEPHONE="POSIX"
-LC_MEASUREMENT="POSIX"
-LC_IDENTIFICATION="POSIX"
-LC_ALL=
+$ sudo localedef -f EUC-KR -i ko_KR ko_KR.EUC-KR
 
-
-########################################################################################
-## set locale(1-UTF-8)
-########################################################################################
-$ sudo localedef -i ko_KR ko_KR.eucKR -f EUC-KR
-##$ sudo localedef -c -i ko_KR -f UTF-8 ko_KR.UTF-8
-
-$ cat kor.txt
-한글abc1234한글
-
-
-
-########################################################################################
-## set permanently locale(1)
-########################################################################################
 $ sudo vi /etc/locale.conf
-LANG=ko_KR.eucKR
-#LANG=ko_KR.utf8
+LANG=ko_KR.EUC-KR
 
-$ sudo reboot
+$ sudo localectl set-locale LANG=ko_KR.EUC-KR
 
+$ source /etc/locale.conf
 
-########################################################################################
-## set permanently locale(2)
-########################################################################################
-$ cat ~/.bashrc
-## KOR
-export LANG=ko_KR.eucKR
-#export LC_ALL=ko_KR.UTF-8
-
-. ~/.bashrc
-
-
-########################################################################################
-## set locale
-########################################################################################
 $ vi ~/.bash_profile
+# Set EUC-KR locale
+export LANG=ko_KR.euckr
+export LC_ALL=ko_KR.euckr
 
-export LANG=ko_KR.eucKR
-export LC_ALL=ko_KR.eucKR
-
-#export LC_CTYPE=ko_KR.UTF-8
-#export LC_ALL=ko_KR.UTF-8
-
-locale
-
+$ source ~/.bash_profile
 
 ########################################################################################
-## reboot
+## setting vim
 ########################################################################################
-$ sudo reboot
+$ vi ~/.vimrc
+set fileencodings=utf-8,euc-kr
+set termencoding=utf-8
+set encoding=utf-8
