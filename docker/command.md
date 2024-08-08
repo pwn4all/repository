@@ -63,6 +63,10 @@ docker container cp --help
 ```bash
 docker run -it --name myDebian -h webDebian -p 80:80 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-pwd -e MYSQL_DATABASE
 =daName [--privileged] -v /local_path:container_name/remote_path devian:latest
+
+exam)
+sudo podman run -it --name centos7 -h centos79 -v /home/user/Documents:/root --dns=8.8.8.8 centos:7.9.2009 /bin/bash
+
 ```
 
 #### &#42; options
