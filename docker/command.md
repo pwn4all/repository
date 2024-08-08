@@ -91,7 +91,7 @@ docker pull devian:latest
 #### * port range : -p 28000-29000:8000-9000
 ```bash
 docker create -it --name myDebian -h webDebian -p 80:80 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-pwd -e MYSQL_DATABASE
-=daName [--privileged] -v /local_path:container_name/remote_path devian:latest
+=daName [--privileged] -v /local_path:/container_path devian:latest
 ```
 
 #### 3) run container
