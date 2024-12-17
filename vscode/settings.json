@@ -1,0 +1,21 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.defaultInterpreterPath": "/Users/user/miniconda3/envs/py39/bin/python",
+    "editor.fontSize": 16,
+    "terminal.integrated.inheritEnv": false,
+    "workbench.settings.applyToAllProfiles": [],
+
+    "editor.formatOnSave": true, // 자동저장 on
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "workbench.settings.useSplitJSON": true, // 자동 포맷팅 기능으로 black이라는 포매터를 사용한다
+
+    "java.home": "/opt/homebrew/Cellar/openjdk@21/21.0.5/libexec/openjdk.jdk/Contents/Home",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "/opt/homebrew/Cellar/openjdk@21/21.0.5/libexec/openjdk.jdk/Contents/Home"
+        }
+    ],
+    "java.autobuild.enabled": true,
+    "java.completion.enabled": true
+}
