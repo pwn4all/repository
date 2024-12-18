@@ -1,55 +1,69 @@
 #!/bin/sh
 
-# JAVA_BIN 경로 설정
+# JAVA_BIN Path
 JAVA_BIN="/opt/homebrew/opt/openjdk@21/bin"
 
-# 사용법 출력 함수
+# Print usage
 usage() {
     echo "Usage: $0 <JavaFileNameWithoutExtension>"
     echo "Example: $0 ScreenCaffeine"
     exit 1
 }
 
-# 인자 확인
+# Error Handler
+check_error() {
+    if [ $? -ne 0 ]; then
+        echo "$1 failed."
+        exit 1
+    fi
+}
+
+# Check if a file exists
+check_file_exists() {
+    if [ ! -f "$1" ]; then
+        echo "Error: $1 does not exist."
+        exit 1
+    fi
+}
+
+# Check if a argument exists
 if [ "$#" -ne 1 ]; then
     usage
 fi
 
-# 전달받은 파일명
+# Get filename
 FILE_NAME=$1
 
-# 파일명 체크: Java 소스 파일이 존재하는지 확인
-if [ ! -f "${FILE_NAME}.java" ]; then
-    echo "Error: ${FILE_NAME}.java does not exist."
-    exit 1
-fi
+# copy config file to utils dir
+echo "Copying ${FILE_NAME}.conf..."
+check_file_exists ${FILE_NAME}.conf
+/bin/cp ${FILE_NAME}.conf $HOME/utils
+check_error "copy ${FILE_NAME}.conf failed."
 
-# 컴파일
+# Check if a Java file exists
+check_file_exists "${FILE_NAME}.java"
+
+# Compiling
 echo "Compiling ${FILE_NAME}.java..."
 ${JAVA_BIN}/javac "${FILE_NAME}.java"
-if [ $? -ne 0 ]; then
-    echo "Compilation failed."
-    exit 1
-fi
+check_error "Compilation failed."
 
-# MANIFEST.MF 파일 존재 확인
-if [ ! -f "MANIFEST.MF" ]; then
-    echo "Error: MANIFEST.MF file not found in the current directory."
-    exit 1
-fi
+# Check if MANIFEST.MF file exists
+check_file_exists "MANIFEST.MF"
 
-# JAR 파일 생성
+# create jar file
 echo "Creating ${FILE_NAME}.jar..."
 ${JAVA_BIN}/jar cfm "${FILE_NAME}.jar" MANIFEST.MF "${FILE_NAME}.class"
-if [ $? -ne 0 ]; then
-    echo "JAR creation failed."
-    exit 1
-fi
+check_error "JAR creation failed."
 
-# JAR 실행
+# copy jar file to utils dir
+echo "Copying ${FILE_NAME}.jar..."
+# check_file_exists ${FILE_NAME}.jar
+/bin/cp ${FILE_NAME}.jar $HOME/utils
+check_error "copy ${FILE_NAME}.jar failed."
+
+# execute jar file
 echo "Running ${FILE_NAME}.jar..."
 ${JAVA_BIN}/java -jar "${FILE_NAME}.jar"
-if [ $? -ne 0 ]; then
-    echo "Execution failed."
-    exit 1
-fi
+check_error "Execution failed."
+
