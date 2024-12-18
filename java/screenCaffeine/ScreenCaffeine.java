@@ -15,122 +15,120 @@ import java.util.Map;
 import java.util.Random;
 
 public class ScreenCaffeine {
-   private static final int SECOND = 1000;          // 1초 = 1000ms
-   private static final int MINUTE = 60 * SECOND;   // 1분 = 60초
+    private static final int SECOND = 1000;
+    private static final int MINUTE = 60 * SECOND;
+    private static final int MIN_SLEEP_TIME = 1 * MINUTE;
+    private static final int MAX_SLEEP_TIME = 10 * MINUTE;
 
-   private static PrintWriter logWriter;
+    private static PrintWriter logWriter;
 
-   public ScreenCaffeine() {
-   }
+    public static void main(String[] args) {
+        try {
+            Path configPath = getConfigPath();
+            Map<String, String> config = readConfig(configPath.toString());
+            Path logFilePath = getLogFilePath(config);
+            initializeLogFile(logFilePath);
 
-   public static void main(String[] args) {
-      try {
-         // HOME 디렉토리 가져오기
-         String homeDir = System.getenv("HOME");
-         if (homeDir == null || homeDir.isEmpty()) {
+            log("Screen Caffeine started. Press Ctrl+C to stop. Log file: " + logFilePath);
+
+            Robot robot = new Robot();
+            Random random = new Random();
+
+            while (true) {
+                simulateMouseMovement(robot);
+                simulateKeyPress(robot);
+
+                int sleepTime = MIN_SLEEP_TIME + random.nextInt(MAX_SLEEP_TIME - MIN_SLEEP_TIME + 1);
+                sleepTime = MIN_SLEEP_TIME; // Override for consistent sleep
+                log("Sleeping for: " + (sleepTime / MINUTE) + " minutes");
+                Thread.sleep(sleepTime);
+            }
+        } catch (Exception e) {
+            handleException(e);
+        } finally {
+            closeLogWriter();
+        }
+    }
+
+    private static Path getConfigPath() throws IOException {
+        String homeDir = System.getenv("HOME");
+        if (homeDir == null || homeDir.isEmpty()) {
             throw new IOException("HOME environment variable is not set.");
-         }
+        }
+        return Paths.get(homeDir, "utils/ScreenCaffeine.conf");
+    }
 
-         // 초기 설정 파일 경로: $HOME/ScreenCaffeine.conf
-         Path initialConfigPath = Paths.get(homeDir, "utils/ScreenCaffeine.conf");
-         Map<String, String> initialConfig = readConfig(initialConfigPath.toString());
+    private static Path getLogFilePath(Map<String, String> config) throws IOException {
+        String logFilename = config.get("FILENAME");
+        String logFilepath = config.get("FILEPATH");
+        if (logFilename == null || logFilepath == null) {
+            throw new IOException("Invalid configuration file. Missing FILENAME or FILEPATH.");
+        }
 
-         // 로그 파일 경로 설정
-         String logFilename = initialConfig.get("FILENAME");
-         String logFilepath = initialConfig.get("FILEPATH");
-         if (logFilename == null || logFilepath == null) {
-            throw new IOException("Invalid final configuration file. Missing FILENAME or FILEPATH.");
-         }
-         Path logFilePath = Paths.get(homeDir, logFilepath, logFilename + ".log");
-
-         // 로그 파일 디렉토리 생성
-         File logDir = logFilePath.getParent().toFile();
-         if (!logDir.exists() && !logDir.mkdirs()) {
+        Path logFilePath = Paths.get(System.getenv("HOME"), logFilepath, logFilename + ".log");
+        File logDir = logFilePath.getParent().toFile();
+        if (!logDir.exists() && !logDir.mkdirs()) {
             throw new IOException("Failed to create directory: " + logDir.getAbsolutePath());
-         }
+        }
+        return logFilePath;
+    }
 
-         // 로그 파일 초기화 (새로 쓰기 모드)
-         logWriter = new PrintWriter(new FileWriter(logFilePath.toString(), false), true); // append 모드를 false로 설정
-         log("Screen Caffeine started. Press Ctrl+C to stop. Log file: " + logFilePath);
+    private static void initializeLogFile(Path logFilePath) throws IOException {
+        logWriter = new PrintWriter(new FileWriter(logFilePath.toString(), false), true);
+    }
 
-         Robot robot = new Robot();
-         Random random = new Random();
+    private static void simulateMouseMovement(Robot robot) {
+        Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+        robot.mouseMove(mousePoint.x - 1, mousePoint.y - 1);
+        robot.mouseMove(mousePoint.x, mousePoint.y);
 
-         while (true) {
-            // 기존 마우스 위치 가져오기
-            Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-            int pointX = (int) mousePoint.getX();
-            int pointY = (int) mousePoint.getY();
+        Point updatedPoint = MouseInfo.getPointerInfo().getLocation();
+        log("Mouse Position: (X: " + updatedPoint.x + ", Y: " + updatedPoint.y + ")");
+    }
 
-            // 마우스 위치를 이동
-            robot.mouseMove(pointX - 1, pointY - 1);
-            robot.mouseMove(pointX, pointY);
+    private static void simulateKeyPress(Robot robot) {
+        robot.keyPress(16); // Shift key
+        robot.keyRelease(16);
+    }
 
-            // 실제로 업데이트된 마우스 위치 가져오기
-            Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
-            int mouseLocationX = (int) mouseLocation.getX();
-            int mouseLocationY = (int) mouseLocation.getY();
+    private static Map<String, String> readConfig(String configFilePath) throws IOException {
+        Map<String, String> config = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(configFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (!line.isEmpty() && !line.startsWith("#")) {
+                    String[] parts = line.split("=", 2);
+                    if (parts.length == 2) {
+                        config.put(parts[0].trim(), parts[1].trim());
+                    }
+                }
+            }
+        }
+        return config;
+    }
 
-            // 키보드 입력 시뮬레이션
-            robot.keyPress(16); // Shift 키 누르기
-            robot.keyRelease(16); // Shift 키 떼기
+    private static void handleException(Exception e) {
+        String errorMessage = "Error: " + e.getMessage();
+        System.err.println(errorMessage);
+        if (logWriter != null) {
+            logWriter.println(errorMessage);
+            e.printStackTrace(logWriter);
+        } else {
+            e.printStackTrace();
+        }
+    }
 
-            // 랜덤 시간 설정: 1분 ~ 10분
-            int minSleepTime = 1 * MINUTE;  // 1분
-            int maxSleepTime = 10 * MINUTE; // 10분
-            int sleepTime = minSleepTime + random.nextInt(maxSleepTime - minSleepTime + 1);
-
-            // 1분으로 강제 설정
-            sleepTime = 1 * MINUTE;
-
-            // 수정된 좌표와 대기 시간 출력 및 로그 기록
-            String logMessage = "Sleeping for: " + (sleepTime / MINUTE) + " minutes\n" +
-                                "Mouse Position: (X: " + mouseLocationX + ", Y: " + mouseLocationY + ")";
-            log(logMessage);
-
-            // 스레드 대기
-            Thread.sleep(sleepTime);
-         }
-      } catch (AWTException errAWT) {
-         String errorMessage = "Error: Unable to create Robot instance.";
-         log(errorMessage);
-         errAWT.printStackTrace(logWriter);
-      } catch (InterruptedException errInt) {
-         String errorMessage = "Error: Thread interrupted.";
-         log(errorMessage);
-         errInt.printStackTrace(logWriter);
-      } catch (IOException errIO) {
-         System.err.println("Error: Unable to read configuration or write to log file.");
-         errIO.printStackTrace();
-      } finally {
-         if (logWriter != null) {
+    private static void closeLogWriter() {
+        if (logWriter != null) {
             logWriter.close();
-         }
-      }
-   }
+        }
+    }
 
-   // 로그 기록 메서드
-   private static void log(String message) {
-      System.out.println(message);
-      logWriter.println(message);
-   }
-
-   // 설정 파일 읽기
-   private static Map<String, String> readConfig(String configFilePath) throws IOException {
-      Map<String, String> config = new HashMap<>();
-      try (BufferedReader reader = new BufferedReader(new FileReader(configFilePath))) {
-         String line;
-         while ((line = reader.readLine()) != null) {
-            line = line.trim();
-            if (line.isEmpty() || line.startsWith("#")) {
-               continue; // 빈 줄이나 주석 무시
-            }
-            String[] parts = line.split("=", 2); // "KEY=VALUE" 형태 분리
-            if (parts.length == 2) {
-               config.put(parts[0].trim(), parts[1].trim());
-            }
-         }
-      }
-      return config;
-   }
+    private static void log(String message) {
+        System.out.println(message);
+        if (logWriter != null) {
+            logWriter.println(message);
+        }
+    }
 }
