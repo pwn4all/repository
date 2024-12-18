@@ -5,5 +5,6 @@ LOG_FILE="$HOME/utils/ScreenCaffeine.log"
 
 NOHUP="/usr/bin/nohup"
 
-# 로그 파일에 nohup 출력 및 에러를 모두 저장
-$NOHUP $JAVA_BIN/java -jar "$JAR_FILE" >> "$LOG_FILE" 2>&1 &
+# run jar
+$NOHUP $JAVA_BIN/java -jar "$JAR_FILE" &
+#$NOHUP $JAVA_BIN/java -jar "$JAR_FILE" >> "$LOG_FILE" 2>&1 &
