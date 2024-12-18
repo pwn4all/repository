@@ -59,10 +59,10 @@ public class ScreenCaffeine {
     }
 
     private static Path getLogFilePath(Map<String, String> config) throws IOException {
-        String logFilename = config.get("FILENAME");
-        String logFilepath = config.get("FILEPATH");
+        String logFilename = config.get("LOGFILENAME");
+        String logFilepath = config.get("LOGFILEPATH");
         if (logFilename == null || logFilepath == null) {
-            throw new IOException("Invalid configuration file. Missing FILENAME or FILEPATH.");
+            throw new IOException("Missing LOGFILENAME or LOGFILEPATH.");
         }
 
         Path logFilePath = Paths.get(System.getenv("HOME"), logFilepath, logFilename + ".log");
