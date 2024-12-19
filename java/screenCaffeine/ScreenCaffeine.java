@@ -39,7 +39,8 @@ public class ScreenCaffeine {
                 simulateKeyPress(robot);
 
                 int sleepTime = MIN_SLEEP_TIME + random.nextInt(MAX_SLEEP_TIME - MIN_SLEEP_TIME + 1);
-                sleepTime = MIN_SLEEP_TIME; // Override for consistent sleep
+                // sleepTime = MIN_SLEEP_TIME; // force set 1MIN
+
                 log("Sleeping for: " + (sleepTime / MINUTE) + " minutes");
                 Thread.sleep(sleepTime);
             }
