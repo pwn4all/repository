@@ -1,8 +1,8 @@
-#!/bin/zsh
+#!/bin/sh
 
 : <<'EOF'
 # required file list
-1. ScreenCaffeinePlist.class
+1. ScreenCaffeinePlist.class > com.user.screencaffeine.plist
 2. ScreenCaffeine.jar
 EOF
 
@@ -55,7 +55,7 @@ java ScreenCaffeinePlist
 # echo "Copying ${SCREENCAFFEINE_PLIST}..."
 # check_file_exists ${SCREENCAFFEINE_PLIST}
 # /bin/cp com.user.screencaffeine.plist $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
-# check_error "copy ${SCREENCAFFEINE_PLIST} failed."
+# check_error "copy ${SCREENCAFFEINE_PLIST}"
 /bin/chmod 644 $HOME/Library/LaunchAgents/${SCREENCAFFEINE_PLIST}
 /bin/launchctl load $HOME/Library/LaunchAgents/${SCREENCAFFEINE_PLIST}
 /bin/launchctl list | grep com.user.screencaffeine
