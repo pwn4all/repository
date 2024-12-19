@@ -1,5 +1,12 @@
 #!/bin/sh
 
+: <<'EOF'
+# required file list
+1. ScreenCaffeine.java
+2. ScreenCaffeinePlist.java
+3. MANIFEST.MF
+EOF
+
 # Print usage
 usage() {
     echo "Usage: $0 <JavaFileNameWithoutExtension>"
