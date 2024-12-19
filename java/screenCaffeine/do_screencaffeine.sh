@@ -8,3 +8,9 @@ NOHUP="/usr/bin/nohup"
 # run jar
 $NOHUP $JAVA_BIN/java -jar "$JAR_FILE" &
 #$NOHUP $JAVA_BIN/java -jar "$JAR_FILE" >> "$LOG_FILE" 2>&1 &
+
+: <<'EOF'
+# run using launchctl
+1. launchctl load $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
+2. launchctl unload $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
+EOF
