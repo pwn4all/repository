@@ -129,7 +129,17 @@ public class ScreenCaffeine {
     private static void log(String message) {
         System.out.println(message);
         if (logWriter != null) {
+            try {
+                File logFile = new File(logWriter.toString());
+                if (logFile.exists() && logFile.length() > 40 * 1024) { // 40KB 초과 확인
+                    logWriter.close(); // 기존 logWriter 닫기
+                    initializeLogFile(logFile.toPath()); // 로그 파일 초기화
+                }
+            } catch (Exception e) {
+                System.err.println("Error while checking log file size: " + e.getMessage());
+            }
             logWriter.println(message);
         }
     }
+    
 }
