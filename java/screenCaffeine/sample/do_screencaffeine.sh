@@ -13,4 +13,5 @@ $NOHUP $JAVA_BIN/java -jar "$JAR_FILE" &
 # run using launchctl
 1. launchctl load $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
 2. launchctl unload $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
+3. launchctl list | grep -i screencaffeine
 EOF
