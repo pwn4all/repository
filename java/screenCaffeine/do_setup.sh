@@ -27,12 +27,19 @@ SCREENCAFFEINE_PLIST=com.user.screencaffeine.plist
 FILE_NAME=ScreenCaffeine
 
 # create screenCaffeine.conf
-echo -e "LOGFILENAME=ScreenCaffeine\nLOGFILEPATH=utils\n " > ${FILE_NAME}.conf
+echo "LOGFILENAME=ScreenCaffeine\nLOGFILEPATH=utils\n " > ${FILE_NAME}.conf
 
 # create utils directory if it does not exist
 echo "Creating $HOME/utils directory if it does not exist..."
 /bin/mkdir -p "$HOME/utils"
 check_error "Failed to create $HOME/utils directory."
+
+
+# create readme file
+echo "Create $HOME/utils/${FILENAME}.readme"
+echo "\tlaunchctl load $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
+        launchctl unload $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
+        launchctl list | grep -i screencaffeine" > $HOME/utils/${FILENAME}.readme
 
 
 # copy config file to utils dir
