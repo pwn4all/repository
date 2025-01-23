@@ -1,6 +1,7 @@
 import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Robot;
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +40,6 @@ public class ScreenCaffeine {
                 simulateKeyPress(robot);
 
                 int sleepTime = MIN_SLEEP_TIME + random.nextInt(MAX_SLEEP_TIME - MIN_SLEEP_TIME + 1);
-                // sleepTime = MIN_SLEEP_TIME; // force set 1MIN
 
                 log("Sleeping for: " + (sleepTime / MINUTE) + " minutes");
                 Thread.sleep(sleepTime);
@@ -79,12 +79,24 @@ public class ScreenCaffeine {
     }
 
     private static void simulateMouseMovement(Robot robot) {
-        Point mousePoint = MouseInfo.getPointerInfo().getLocation();
-        robot.mouseMove(mousePoint.x - 1, mousePoint.y - 1);
-        robot.mouseMove(mousePoint.x, mousePoint.y);
+        try {
+            PointerInfo pointerInfo = MouseInfo.getPointerInfo();
+            if (pointerInfo == null) {
+                log("MouseInfo.getPointerInfo() returned null. Moving mouse to (100, 100).");
+                robot.mouseMove(100, 100);
+                return;
+            }
 
-        Point updatedPoint = MouseInfo.getPointerInfo().getLocation();
-        log("Mouse Position: (X: " + updatedPoint.x + ", Y: " + updatedPoint.y + ")");
+            Point mousePoint = pointerInfo.getLocation();
+            robot.mouseMove(mousePoint.x - 1, mousePoint.y - 1);
+            robot.mouseMove(mousePoint.x, mousePoint.y);
+
+            Point updatedPoint = MouseInfo.getPointerInfo().getLocation();
+            log("Mouse Position: (X: " + updatedPoint.x + ", Y: " + updatedPoint.y + ")");
+        } catch (Exception e) {
+            log("Error during mouse movement simulation: " + e.getMessage());
+            robot.mouseMove(100, 100);
+        }
     }
 
     private static void simulateKeyPress(Robot robot) {
@@ -129,17 +141,7 @@ public class ScreenCaffeine {
     private static void log(String message) {
         System.out.println(message);
         if (logWriter != null) {
-            try {
-                File logFile = new File(logWriter.toString());
-                if (logFile.exists() && logFile.length() > 40 * 1024) { // 40KB 초과 확인
-                    logWriter.close(); // 기존 logWriter 닫기
-                    initializeLogFile(logFile.toPath()); // 로그 파일 초기화
-                }
-            } catch (Exception e) {
-                System.err.println("Error while checking log file size: " + e.getMessage());
-            }
             logWriter.println(message);
         }
     }
-    
 }
