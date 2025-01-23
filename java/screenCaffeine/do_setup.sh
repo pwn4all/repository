@@ -36,10 +36,10 @@ check_error "Failed to create $HOME/utils directory."
 
 
 # create readme file
-echo "Create $HOME/utils/${FILENAME}.readme"
+echo "Create $HOME/utils/${FILE_NAME}.readme"
 echo "\tlaunchctl load $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
         launchctl unload $HOME/Library/LaunchAgents/com.user.screencaffeine.plist
-        launchctl list | grep -i screencaffeine" > $HOME/utils/${FILENAME}.readme
+        launchctl list | grep -i screencaffeine" > $HOME/utils/${FILE_NAME}.readme
 
 
 # copy config file to utils dir
